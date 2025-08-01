@@ -1,34 +1,11 @@
-"use client";
-// components/SignupModal.js or pages/auth/signup.js
-import { useState } from "react";
+import { BackButton } from "@/components/auth/back_button";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { signup } from "../actions";
 
-export default function SignupPage() {
-    const router = useRouter();
-    const [formData, setFormData] = useState({
-        email: "",
-        password: "",
-    });
-    const [isLoading, setIsLoading] = useState(false);
-
-    function handleInputChange(ev: Event) {
-        setFormData({
-            ...formData,
-            [ev.target!.name]: ev.target!.value,
-        });
-    }
-
-    async function handleSubmit(ev: SubmitEvent) {
-        ev.preventDefault();
-        setIsLoading(true);
-
-        console.log("Signup submitted:", formData);
-
-        setTimeout(() => {
-            setIsLoading(false);
-        }, 1000);
-    }
+export default async function SignupPage(props: {
+    searchParams: Promise<{ error: boolean }>
+}) {
+    const params = await props.searchParams;
 
     return (
         <div className="w-full max-w-sm">
@@ -39,11 +16,13 @@ export default function SignupPage() {
                 <h1 className="text-lg text-base-content/80">
                     Sign up for Bad Clients
                 </h1>
+                {!params.error ? null :
+                    <p className="text-red-400">Account creation failed</p>
+                }
             </div>
-
             <div className="card bg-base-100 shadow-lg border border-base-300">
                 <div className="card-body p-6">
-                    <form onSubmit={handleSubmit} className="space-y-4">
+                    <form className="space-y-4">
                         <div className="form-control">
                             <label className="label pb-1">
                                 <span className="label-text text-sm font-medium">
@@ -55,8 +34,6 @@ export default function SignupPage() {
                                 name="email"
                                 placeholder="Enter your email"
                                 className="input input-bordered w-full focus:input-primary"
-                                value={formData.email}
-                                onChange={handleInputChange}
                                 required
                                 autoFocus
                             />
@@ -73,21 +50,16 @@ export default function SignupPage() {
                                 name="password"
                                 placeholder="Create a password"
                                 className="input input-bordered w-full focus:input-primary"
-                                value={formData.password}
-                                onChange={handleInputChange}
                                 required
-                                minLength="8"
+                                minLength={8}
                             />
                         </div>
 
                         <button
-                            type="submit"
-                            className={`btn btn-primary w-full mt-6 ${isLoading ? "loading" : ""}`}
-                            disabled={isLoading}
+                            formAction={signup}
+                            className="btn btn-primary w-full mt-6"
                         >
-                            {isLoading
-                                ? "Creating account..."
-                                : "Create account"}
+                            Create account
                         </button>
                     </form>
                 </div>
@@ -106,15 +78,7 @@ export default function SignupPage() {
                     </p>
                 </div>
             </div>
-
-            <div className="text-center mt-6">
-                <button
-                    onClick={() => router.back()}
-                    className="btn btn-ghost btn-sm text-base-content/60 hover:text-base-content"
-                >
-                    ← Back
-                </button>
-            </div>
+            <BackButton />
         </div>
     );
 }
