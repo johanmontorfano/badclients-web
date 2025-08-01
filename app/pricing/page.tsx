@@ -1,0 +1,118 @@
+export default function Page() {
+    const tiers = [
+        {
+            name: "Free",
+            price: "€0",
+            description: "Perfect for light and casual usage.",
+            features: ["5 requests per day", "Extension support"],
+            missing: [
+                "Job knowledge database access",
+                "Lifetime usage",
+                "Early access",
+            ],
+        },
+        {
+            name: "Hunter",
+            price: "€5/month",
+            description: "Ideal for active freelancers seeking opportunities.",
+            features: [
+                "500 requests per day",
+                "Extension support",
+                "Job knowledge database access",
+            ],
+            missing: ["Lifetime usage", "Early access"],
+        },
+        {
+            name: "Lifetime Hunter",
+            price: "€49 one-time",
+            description:
+                "Everything in Hunter with lifetime access. Limited early supporter offer.",
+            features: [
+                "Unlimited daily requests",
+                "Extension support",
+                "Job knowledge database access",
+                "Lifetime usage",
+                "Early access",
+            ],
+            missing: [],
+            badge: "LIMITED OFFER",
+        },
+    ];
+
+    return (
+        <div className="py-12 px-4 sm:px-6 lg:px-8">
+            <div className="max-w-7xl mx-auto text-center">
+                <h2 className="text-4xl font-bold tracking-tight">
+                    Choose Your Plan
+                </h2>
+                <p className="mt-4 text-lg text-base-content/70">
+                    Whether you're testing or hunting for your next job, we have
+                    a plan for you.
+                </p>
+            </div>
+            <div className="mt-12 grid gap-6 lg:grid-cols-3 max-lg:grid-rows-3 max-w-6xl mx-auto h-full justify-center">
+                {tiers.map((tier) => (
+                    <div
+                        key={tier.name}
+                        className="card max-w-[600px] lg:min-h-[50vh] bg-base-100 shadow-xl border border-base-300 h-full"
+                    >
+                        <div className="card-body flex flex-col justify-between">
+                            <div>
+                                <h3 className="text-2xl font-semibold text-primary">
+                                    {tier.name}
+                                </h3>
+                                <p className="mt-2 text-3xl font-bold">
+                                    {tier.price}
+                                </p>
+                                {tier.badge ? (
+                                    <div className="badge badge-xs badge-info">
+                                        {tier.badge}
+                                    </div>
+                                ) : null}
+                            </div>
+                            <div>
+                            <p className="text-base text-base-content/70">
+                                {tier.description}
+                            </p>
+                            </div>
+                            <div>
+                                <ul className="space-y-2">
+                                    {tier.features.map((feature, index) => (
+                                        <li
+                                            key={index}
+                                            className="flex items-center gap-2"
+                                        >
+                                            <span className="text-success">
+                                                ✓
+                                            </span>{" "}
+                                            {feature}
+                                        </li>
+                                    ))}
+                                    {tier.missing.map((feature, index) => (
+                                        <li
+                                            key={index}
+                                            className="flex items-center gap-2 opacity-50"
+                                        >
+                                            <span className="text-disabled">
+                                                ⨯
+                                            </span>{" "}
+                                            {feature}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                            <div>
+                                <button
+                                    className="btn btn-primary btn-block"
+                                    disabled
+                                >
+                                    Coming soon
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+}
