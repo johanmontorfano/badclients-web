@@ -54,7 +54,7 @@ export default function Page() {
                 {tiers.map((tier) => (
                     <div
                         key={tier.name}
-                        className="card max-w-[600px] lg:min-h-[50vh] bg-base-100 shadow-xl border border-base-300 h-full"
+                        className="card max-w-[600px] min-h-[40vh] lg:min-h-[50vh] bg-base-100 shadow-xl border border-base-300 h-full"
                     >
                         <div className="card-body flex flex-col justify-between">
                             <div>
