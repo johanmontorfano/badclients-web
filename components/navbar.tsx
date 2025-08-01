@@ -1,4 +1,14 @@
-export function Navbar() {
+import { createClient } from "@/utils/supabase/server";
+import { BsPersonCircle } from "react-icons/bs";
+
+export async function Navbar() {
+    const supabase = await createClient();
+    const profile = await supabase.auth.getUser();
+
+    const isLoggedIn = profile.data.user !== null;
+
+    // WARN: Profile link may not be updated
+
     return (
         <div className="navbar bg-base-100 shadow-sm">
             <div className="navbar-start">
@@ -56,6 +66,12 @@ export function Navbar() {
                     href="https://github.com/johanmontorfano/badclients"
                 >
                     Star on Github
+                </a>
+                <a
+                    className="btn"
+                    href={`/auth/${isLoggedIn ? "profile" : "login"}`}
+                >
+                    <BsPersonCircle size={20} />
                 </a>
             </div>
         </div>
