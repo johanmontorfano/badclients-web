@@ -7,7 +7,7 @@ const links = [
     { href: "/docs", label: "Overview" },
     { href: "/docs/howto", label: "How-to" },
     { href: "/docs/extension", label: "Extension" },
-    { href: "/docs/billing", label: "Billing" }
+    { href: "/docs/billing", label: "Billing" },
 ];
 
 export default function DocsLayout(props: { children: React.ReactNode }) {
