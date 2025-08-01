@@ -24,7 +24,7 @@ export default function Page() {
         },
         {
             name: "Lifetime Hunter",
-            price: "€49 one-time",
+            price: "€59 one-time",
             description:
                 "Everything in Hunter with lifetime access. Limited early supporter offer.",
             features: [
@@ -35,7 +35,7 @@ export default function Page() {
                 "Early access",
             ],
             missing: [],
-            badge: "LIMITED OFFER",
+            badge: "Limited Offer",
         },
     ];
 
@@ -58,22 +58,22 @@ export default function Page() {
                     >
                         <div className="card-body flex flex-col justify-between">
                             <div>
-                                <h3 className="text-2xl font-semibold text-primary">
-                                    {tier.name}
-                                </h3>
-                                <p className="mt-2 text-3xl font-bold">
+                                <p className="mt-2 text-xl font-bold text-primary">
                                     {tier.price}
                                 </p>
+                                <h3 className="text-3xl font-semibold">
+                                    {tier.name}
+                                </h3>
                                 {tier.badge ? (
-                                    <div className="badge badge-xs badge-info">
+                                    <div className="badge badge-xs badge-warning">
                                         {tier.badge}
                                     </div>
                                 ) : null}
                             </div>
                             <div>
-                            <p className="text-base text-base-content/70">
-                                {tier.description}
-                            </p>
+                                <p className="text-base text-base-content/70">
+                                    {tier.description}
+                                </p>
                             </div>
                             <div>
                                 <ul className="space-y-2">
@@ -96,7 +96,9 @@ export default function Page() {
                                             <span className="text-disabled">
                                                 ⨯
                                             </span>{" "}
-                                            {feature}
+                                            <span className="line-through">
+                                                {feature}
+                                            </span>
                                         </li>
                                     ))}
                                 </ul>
