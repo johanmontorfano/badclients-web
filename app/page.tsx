@@ -42,7 +42,12 @@ export default function Page() {
                     <JobAnalysis flags={analysis} />
                     <div className="modal-action">
                         <form method="dialog">
-                            <button className="btn" onClick={() => setInput("")}>Close</button>
+                            <button
+                                className="btn"
+                                onClick={() => setInput("")}
+                            >
+                                Close
+                            </button>
                         </form>
                     </div>
                 </div>
@@ -52,12 +57,17 @@ export default function Page() {
                     <p>Unexpected Server Error: {errorCode}</p>
                     <div className="modal-action">
                         <form method="dialog">
-                            <button className="btn" onClick={() => setErrorCode(0)}>Close</button>
+                            <button
+                                className="btn"
+                                onClick={() => setErrorCode(0)}
+                            >
+                                Close
+                            </button>
                         </form>
                     </div>
                 </div>
             </dialog>
-            <main className="min-h-screen flex flex-col items-center justify-center p-8 bg-base-200">
+            <div className="grow flex flex-col items-center justify-center p-8">
                 <h1 className="text-4xl font-bold mb-6 text-center">
                     BadClients — Spot Bad Freelance Jobs Instantly
                 </h1>
@@ -75,7 +85,11 @@ export default function Page() {
                         onClick={analyzeJobPost}
                         disabled={input.trim().length < 20 || loading}
                     >
-                        {loading ? <span className="loading loading-spinner" /> : "Analyze"}
+                        {loading ? (
+                            <span className="loading loading-spinner" />
+                        ) : (
+                            "Analyze"
+                        )}
                     </button>
                 </div>
                 <section className="max-w-3xl text-center mb-8 px-4">
@@ -135,7 +149,7 @@ export default function Page() {
                         </span>
                     </a>
                 </section>
-            </main>
+            </div>
         </>
     );
 }
