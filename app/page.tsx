@@ -105,14 +105,14 @@ export default function Page() {
                         href="https://chrome.google.com/webstore/detail/your-extension-id"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex flex-col items-center space-y-2 p-4 bg-white rounded-lg shadow-md w-28 hover:scale-105 transform transition"
+                        className="flex flex-col items-center space-y-2 p-4 bg-base-100 rounded-md shadow-md w-28 hover:scale-105 transform transition"
                     >
                         <img
                             src="/assets/chrome.svg"
                             alt="Chrome Extension"
                             className="w-12 h-12"
                         />
-                        <span className="text-indigo-800 font-semibold text-center">
+                        <span className="text-indigo-400 font-semibold text-center">
                             Chrome
                         </span>
                     </a>
@@ -121,14 +121,14 @@ export default function Page() {
                         href="https://addons.mozilla.org/en-US/firefox/addon/your-extension-id"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex flex-col items-center space-y-2 p-4 bg-white rounded-lg shadow-md w-28 hover:scale-105 transform transition"
+                        className="flex flex-col items-center space-y-2 p-4 bg-base-100 rounded-md shadow-md w-28 hover:scale-105 transform transition"
                     >
                         <img
                             src="/assets/firefox.svg"
                             alt="Firefox Extension"
                             className="w-12 h-12"
                         />
-                        <span className="text-indigo-800 font-semibold text-center">
+                        <span className="text-indigo-400 font-semibold text-center">
                             Firefox
                         </span>
                     </a>
@@ -137,14 +137,14 @@ export default function Page() {
                         href="https://microsoftedge.microsoft.com/addons/detail/your-extension-id"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex flex-col items-center space-y-2 p-4 bg-white rounded-lg shadow-md w-28 hover:scale-105 transform transition"
+                        className="flex flex-col items-center space-y-2 p-4 bg-base-100 rounded-md shadow-md w-28 hover:scale-105 transform transition"
                     >
                         <img
                             src="/assets/edge.svg"
                             alt="Edge Extension"
                             className="w-12 h-12"
                         />
-                        <span className="text-indigo-800 font-semibold text-center">
+                        <span className="text-indigo-400 font-semibold text-center">
                             Edge
                         </span>
                     </a>
