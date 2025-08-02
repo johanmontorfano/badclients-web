@@ -4,10 +4,7 @@ import { BsPersonCircle } from "react-icons/bs";
 export async function Navbar() {
     const supabase = await createClient();
     const profile = await supabase.auth.getUser();
-
-    const isLoggedIn = profile.data.user !== null;
-
-    // WARN: Profile link may not be updated
+    const isLoggedIn = profile.data.user !== null && !profile.data.user.is_anonymous;
 
     return (
         <div className="navbar bg-base-100 shadow-sm">
