@@ -12,21 +12,24 @@ export async function GET(req: NextRequest) {
     const next = url.searchParams.get("next");
 
     if (!next)
-        return NextResponse.json({ error: "`next` not specified" }, { status: 400 });
+        return NextResponse.json(
+            { error: "`next` not specified" },
+            { status: 400 },
+        );
 
     const supabase = await createClient();
     const user = await supabase.auth.getUser();
 
     if (user.data.user === null)
-        console.log(await supabase.auth.signInAnonymously({
+        await supabase.auth.signInAnonymously({
             options: {
                 data: {
                     usageLastReset: Date.now(),
                     planType: PlanTiers.Free,
                     nickname: "anon",
-                    usage: 0
-                } as UserMetadata
-            }
-        }));
-    return NextResponse.redirect(next);    
+                    usage: 0,
+                } as UserMetadata,
+            },
+        });
+    return NextResponse.redirect(next);
 }
