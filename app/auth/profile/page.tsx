@@ -5,7 +5,7 @@ import {
     BsQuestionCircle,
 } from "react-icons/bs";
 import { BackButton } from "@/components/auth/back_button";
-import { PlanTiers } from "@/utils/stripe/plans";
+import { PlanTiers, planUsage } from "@/utils/stripe/plans";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import { DeleteDialog } from "@/components/auth/delete_dialog";
@@ -74,6 +74,38 @@ export default async function Page() {
                             </p>
                         </div>
                     </div>
+                </div>
+                <div className="bg-base-100 rounded-lg p-8 mb-8 border border-base-300">
+                    <div className="flex justify-between items-center">
+                        <div>
+                            <h3 className="text-sm font-semibold text-base-content/60 uppercase tracking-wider mb-2">
+                                Usage
+                            </h3>
+                            <p>
+                                {planUsage[
+                                    user.user_metadata.planType as PlanTiers
+                                ].usage - user.user_metadata.usage}{" "}
+                                requests remaining
+                            </p>
+                        </div>
+                            <a
+                                href="/"
+                                className="btn btn-ghost btn-sm text-base-content/60 hover:text-base-content"
+                            >
+                                Use requests →
+                            </a>
+                    </div>
+                    <progress
+                        className="progress w-full"
+                        value={Math.ceil(
+                            (user.user_metadata.usage /
+                                planUsage[
+                                    user.user_metadata.planType as PlanTiers
+                                ].usage) *
+                                100,
+                        )}
+                        max={100}
+                    />
                 </div>
                 <div className="bg-base-100 rounded-lg p-8 border border-base-300">
                     <h3 className="text-xl font-semibold text-base-content mb-6">
