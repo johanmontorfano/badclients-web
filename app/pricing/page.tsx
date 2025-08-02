@@ -19,7 +19,7 @@ const tiers = [
     },
     {
         name: "Hunter",
-        price:  `€5/month`,
+        price: `€5/month`,
         description: "Ideal for active freelancers seeking opportunities.",
         features: [
             `${planUsage[1].usage} requests per day`,
