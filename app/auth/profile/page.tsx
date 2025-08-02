@@ -88,12 +88,12 @@ export default async function Page() {
                                 requests remaining
                             </p>
                         </div>
-                            <a
-                                href="/"
-                                className="btn btn-ghost btn-sm text-base-content/60 hover:text-base-content"
-                            >
-                                Use requests →
-                            </a>
+                        <a
+                            href="/"
+                            className="btn btn-ghost btn-sm text-base-content/60 hover:text-base-content"
+                        >
+                            Use requests →
+                        </a>
                     </div>
                     <progress
                         className="progress w-full"
