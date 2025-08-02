@@ -62,7 +62,7 @@ export async function Navbar() {
             </div>
             <div className="navbar-end">
                 <a
-                    className="btn"
+                    className="btn btn-ghost"
                     href="https://github.com/johanmontorfano/badclients"
                 >
                     Star on Github
@@ -71,7 +71,7 @@ export async function Navbar() {
                     className="btn"
                     href={`/auth/${isLoggedIn ? "profile" : "login"}`}
                 >
-                    <BsPersonCircle size={20} />
+                    {isLoggedIn ? <BsPersonCircle size={20} /> : "Log In"}
                 </a>
             </div>
         </div>
