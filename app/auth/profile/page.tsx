@@ -106,7 +106,7 @@ export default async function Page() {
                                     user.user_metadata.usage <
                                 1
                                     ? "/pricing"
-                                    : "/"
+                                    : "/app"
                             }
                             className="btn btn-ghost btn-sm text-base-content/60 hover:text-base-content"
                         >

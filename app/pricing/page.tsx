@@ -9,7 +9,10 @@ export const metadata: Metadata = {
 const tiers = [
     {
         name: "Free",
-        price: "€0",
+        price: {
+            "EUR": "€0",
+            "USD": "$0"
+        },
         description: "Perfect for light and casual usage.",
         features: ["5 requests per day", "Extension support"],
         missing: [
@@ -22,7 +25,10 @@ const tiers = [
     },
     {
         name: "Hunter",
-        price: `€5/month`,
+        price: {
+            "EUR": "€5/month",
+            "USD": "$5/month"
+        },
         description: "Ideal for active freelancers seeking opportunities.",
         features: [
             `${planUsage[1].usage} requests per day`,
@@ -35,7 +41,10 @@ const tiers = [
     },
     {
         name: "Lifetime Hunter",
-        price: "€59 one-time",
+        price: {
+            "EUR": "€59 one-time",
+            "USD": "$59 one-time"
+        },
         description:
             "Everything in Hunter with lifetime access. Limited early supporter offer.",
         features: [
@@ -52,7 +61,10 @@ const tiers = [
     },
 ];
 
-export default function Page() {
+export default async function Page(props: { searchParams: Promise<Record<string, string>> }) {
+    const params = await props.searchParams
+    const currency = (params.curr || "USD") as "EUR" | "USD";
+
     return (
         <div className="py-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-7xl mx-auto text-center">
@@ -65,6 +77,12 @@ export default function Page() {
                 </p>
             </div>
             <div className="mt-12 grid gap-6 lg:grid-cols-3 max-lg:grid-rows-3 max-w-6xl mx-auto h-full justify-center">
+                <div />
+                <div />
+                <div className="join justify-end">
+  <a href="/pricing?curr=USD" className="btn join-item">$</a>
+  <a href="/pricing?curr=EUR" className="btn join-item">€</a>
+</div>
                 {tiers.map((tier) => (
                     <div
                         key={tier.name}
@@ -73,7 +91,7 @@ export default function Page() {
                         <div className="card-body flex flex-col justify-between">
                             <div>
                                 <p className="mt-2 text-xl font-bold text-primary">
-                                    {tier.price}
+                                    {tier.price[currency]}
                                 </p>
                                 <h3 className="text-3xl font-semibold">
                                     {tier.name}
@@ -121,6 +139,7 @@ export default function Page() {
                                 <PricingButton
                                     url={tier.url}
                                     mode={tier.mode}
+                                    curr={currency}
                                 />
                             </div>
                         </div>

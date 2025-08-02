@@ -12,12 +12,15 @@ export async function POST(req: NextRequest) {
 
     const url = new URL(req.url);
     const planID = parseInt(url.searchParams.get("planID")!);
+    const currency = url.searchParams.get("curr");
 
     if (user.data.user === null)
         return NextResponse.redirect(
-            `/auth/login?next=billing&planID=${planID}`,
+            `/auth/login?next=billing&planID=${planID}&curr=${currency}`,
         );
 
+    if (!currency)
+        return NextResponse.json({ error: "Currency missing" }, { status: 400 });
     if (isNaN(planID) || planID < 1 || planID > 2)
         return NextResponse.json({ error: "Bad plan price" }, { status: 400 });
 
@@ -28,6 +31,7 @@ export async function POST(req: NextRequest) {
             success_url: origin + "/auth/profile?billing=ok",
             customer_email: user.data.user.email!,
             customer: user.data.user.user_metadata.customerID,
+            currency,
             metadata: {
                 supabase_user_id: user.data.user.id,
             },
@@ -42,6 +46,7 @@ export async function POST(req: NextRequest) {
 
         return NextResponse.json({ url: checkout.url! }, { status: 200 });
     } catch (err) {
+        console.log(err);
         return NextResponse.json(err, { status: 500 });
     }
 }
