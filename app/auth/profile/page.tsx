@@ -85,14 +85,33 @@ export default async function Page() {
                                 {planUsage[
                                     user.user_metadata.planType as PlanTiers
                                 ].usage - user.user_metadata.usage}{" "}
-                                requests remaining
+                                requests remaining{" "}
+                                {planUsage[
+                                    user.user_metadata.planType as PlanTiers
+                                ].timeRange === "day"
+                                    ? "today"
+                                    : "this month"}
                             </p>
                         </div>
                         <a
-                            href="/"
+                            href={
+                                planUsage[
+                                    user.user_metadata.planType as PlanTiers
+                                ].usage -
+                                    user.user_metadata.usage <
+                                1
+                                    ? "/pricing"
+                                    : "/"
+                            }
                             className="btn btn-ghost btn-sm text-base-content/60 hover:text-base-content"
                         >
-                            Use requests →
+                            {planUsage[user.user_metadata.planType as PlanTiers]
+                                .usage -
+                                user.user_metadata.usage <
+                            1
+                                ? "Upgrade"
+                                : "Use requests"}{" "}
+                            →
                         </a>
                     </div>
                     <progress
