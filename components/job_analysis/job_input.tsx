@@ -5,6 +5,7 @@ interface JobInputSectionProps {
     input: string;
     loading: boolean;
     requestsLeft?: number;
+    planTimeRange?: "day" | "month";
     setInput: (value: string) => void;
     setErrorCode: (error: string) => void;
     analyzeJobPost: () => void;
@@ -14,6 +15,7 @@ export function JobInputSection({
     input,
     loading,
     requestsLeft,
+    planTimeRange,
     setInput,
     setErrorCode,
     analyzeJobPost,
@@ -51,13 +53,6 @@ export function JobInputSection({
 
     return (
         <div className="w-full max-w-4xl mx-auto">
-            {typeof requestsLeft === "number" && (
-                <div className="flex justify-end mb-3">
-                    <span className="text-xs text-base-content/60">
-                        {requestsLeft} requests left
-                    </span>
-                </div>
-            )}
             <div className="relative">
                 <div className="border border-base-300 rounded-xl bg-base-100 focus-within:border-primary transition-colors duration-200">
                     <textarea
@@ -109,9 +104,13 @@ export function JobInputSection({
                             </>
                         )}
                     </span>
-                    {getRequestsLeft() <= 0 && (
-                        <span className="text-xs text-error">
-                            No requests remaining
+
+                    {typeof requestsLeft === "number" && (
+                        <span className="text-xs text-base-content/60">
+                            {requestsLeft} requests left{" "}
+                            {planTimeRange && planTimeRange === "day"
+                                ? "today"
+                                : "this month"}
                         </span>
                     )}
                 </div>
