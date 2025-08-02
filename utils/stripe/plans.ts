@@ -27,3 +27,13 @@ export const planUsage: Record<
         timeRange: "month",
     },
 };
+
+// Determines if a plan usage should be resetted based on last usage
+export function planRequiresReset(planType: PlanTiers, lastReset: number) {
+    const plan = planUsage[planType];
+    const diff = Date.now() - lastReset;
+
+    if (plan.timeRange === "day" && diff >= 86400 * 1000) return true;
+    if (plan.timeRange === "month" && diff >= 86400 * 1000 * 30) return true;
+    return false;
+}

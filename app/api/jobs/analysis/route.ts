@@ -1,6 +1,53 @@
+import { planRequiresReset, planUsage } from "@/utils/stripe/plans";
+import { createClient } from "@/utils/supabase/server";
+import { updateUserMetadata, UserMetadata } from "@/utils/supabase/users";
 import { NextRequest, NextResponse } from "next/server";
 
+function unwrapMarkdown(text: any): any {
+    if (typeof text === "object")
+        return text;
+
+    const trimmed = text.trim();
+
+  if (trimmed.startsWith('```') && trimmed.endsWith('```')) {
+    const lines = trimmed.split('\n');
+
+    if (lines.length >= 3)
+      return JSON.parse(lines.slice(1, -1).join('\n').trim());
+  }
+
+  return text;
+}
+
 export async function POST(req: NextRequest) {
+    // Before anything, we verify that the user has enough credits to do the
+    // operation. Every client is an user (anonymous by default), this way we
+    // are always able to check remaining credits.
+    const supabase = await createClient();
+    const { data, error } = await supabase.auth.getUser();
+
+    if (error) return NextResponse.json({ error: error.name }, { status: 403 });
+
+    let { planType, usage, usageLastReset } = data.user
+        .user_metadata as UserMetadata;
+    const { usage: maxUsage } = planUsage[planType];
+
+    if (planRequiresReset(planType, usageLastReset)) {
+        await updateUserMetadata(data.user.id, {
+            usage: 0,
+            usageLastReset: Date.now(),
+        });
+        usage = 0;
+        usageLastReset = Date.now();
+    }
+
+    if (usage >= maxUsage)
+        return NextResponse.json(
+            { error: "Not enough credits" },
+            { status: 400 },
+        );
+    await updateUserMetadata(data.user.id, { usage: usage + 1 });
+
     const { input } = await req.json();
 
     if (!input)
@@ -52,10 +99,6 @@ description: write a fast description of the job. It must be a plain one-line st
 
     const content = await response.json();
 
-    console.log(content);
-
-    console.log(content.choices[0].message.content);
-
-    if (content.choices) return content.choices[0].message.content;
+    if (content.choices) return unwrapMarkdown(content.choices[0].message.content);
     return content;
 }

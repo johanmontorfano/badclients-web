@@ -1,6 +1,6 @@
 import { stripe } from "@/utils/stripe/client";
 import { PlanTiers } from "@/utils/stripe/plans";
-import { createClient } from "@/utils/supabase/server";
+import { updateUserMetadata } from "@/utils/supabase/users";
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 
@@ -8,34 +8,6 @@ function getCustomerID(
     from: string | Stripe.Customer | Stripe.DeletedCustomer,
 ): string {
     return typeof from === "string" ? from : from.id;
-}
-
-// Updates supabase user metadata using Admin API.
-async function updateUserMetadata(
-    supabaseUserId: string,
-    updates: Record<string, any>,
-) {
-    const supabase = await createClient();
-    const { data: userData, error: getUserError } =
-        await supabase.auth.admin.getUserById(supabaseUserId);
-
-    if (getUserError || !userData.user)
-        throw new Error(`Failed to get user: ${getUserError?.message}`);
-
-    const { error: updateError } = await supabase.auth.admin.updateUserById(
-        supabaseUserId,
-        {
-            user_metadata: {
-                ...userData.user.user_metadata,
-                ...updates,
-            },
-        },
-    );
-
-    if (updateError)
-        throw new Error(
-            `Failed to update user metadata: ${updateError.message}`,
-        );
 }
 
 // Stripe webhook API endpoint
