@@ -10,8 +10,8 @@ const tiers = [
     {
         name: "Free",
         price: {
-            "EUR": "€0",
-            "USD": "$0"
+            EUR: "€0",
+            USD: "$0",
         },
         description: "Perfect for light and casual usage.",
         features: ["5 requests per day", "Extension support"],
@@ -26,8 +26,8 @@ const tiers = [
     {
         name: "Hunter",
         price: {
-            "EUR": "€5/month",
-            "USD": "$5/month"
+            EUR: "€5/month",
+            USD: "$5/month",
         },
         description: "Ideal for active freelancers seeking opportunities.",
         features: [
@@ -42,8 +42,8 @@ const tiers = [
     {
         name: "Lifetime Hunter",
         price: {
-            "EUR": "€59 one-time",
-            "USD": "$59 one-time"
+            EUR: "€59 one-time",
+            USD: "$59 one-time",
         },
         description:
             "Everything in Hunter with lifetime access. Limited early supporter offer.",
@@ -61,8 +61,10 @@ const tiers = [
     },
 ];
 
-export default async function Page(props: { searchParams: Promise<Record<string, string>> }) {
-    const params = await props.searchParams
+export default async function Page(props: {
+    searchParams: Promise<Record<string, string>>;
+}) {
+    const params = await props.searchParams;
     const currency = (params.curr || "USD") as "EUR" | "USD";
 
     return (
@@ -80,9 +82,13 @@ export default async function Page(props: { searchParams: Promise<Record<string,
                 <div />
                 <div />
                 <div className="join justify-end">
-  <a href="/pricing?curr=USD" className="btn join-item">$</a>
-  <a href="/pricing?curr=EUR" className="btn join-item">€</a>
-</div>
+                    <a href="/pricing?curr=USD" className="btn join-item">
+                        $
+                    </a>
+                    <a href="/pricing?curr=EUR" className="btn join-item">
+                        €
+                    </a>
+                </div>
                 {tiers.map((tier) => (
                     <div
                         key={tier.name}

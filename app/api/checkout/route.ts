@@ -20,7 +20,10 @@ export async function POST(req: NextRequest) {
         );
 
     if (!currency)
-        return NextResponse.json({ error: "Currency missing" }, { status: 400 });
+        return NextResponse.json(
+            { error: "Currency missing" },
+            { status: 400 },
+        );
     if (isNaN(planID) || planID < 1 || planID > 2)
         return NextResponse.json({ error: "Bad plan price" }, { status: 400 });
 
