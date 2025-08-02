@@ -1,5 +1,6 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextRequest, NextResponse } from "next/server";
+import { origin } from "../origin";
 
 export async function updateSession(request: NextRequest) {
     let supabaseResponse = NextResponse.next({
@@ -29,7 +30,14 @@ export async function updateSession(request: NextRequest) {
         },
     );
 
-    await supabase.auth.getUser();
+    const user = await supabase.auth.getUser();
+
+    if (
+        user.data.user !== null &&
+        (request.nextUrl.pathname === "/auth/login" ||
+            request.nextUrl.pathname === "/auth/signup")
+    )
+        return NextResponse.redirect(origin + "/auth/profile");
 
     return supabaseResponse;
 }
