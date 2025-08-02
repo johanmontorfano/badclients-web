@@ -81,7 +81,10 @@ export default async function Page() {
                     </h3>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                        <button className="btn btn-outline justify-start h-auto py-4">
+                        <a
+                            href="/auth/profile/password"
+                            className="btn btn-outline justify-start h-auto py-4"
+                        >
                             <div className="flex items-center">
                                 <BsKey size={24} />
                                 <div className="text-left ml-4">
@@ -93,7 +96,7 @@ export default async function Page() {
                                     </div>
                                 </div>
                             </div>
-                        </button>
+                        </a>
                         <a
                             href={
                                 user.user_metadata.planType === PlanTiers.Free
