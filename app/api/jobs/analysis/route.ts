@@ -1,3 +1,6 @@
+"use server";
+
+import { JobAnalysisErrors } from "@/components/job_analysis/data";
 import { planRequiresReset, planUsage } from "@/utils/stripe/plans";
 import { createClient } from "@/utils/supabase/server";
 import { updateUserMetadata, UserMetadata } from "@/utils/supabase/users";
@@ -26,7 +29,14 @@ export async function POST(req: NextRequest) {
     const supabase = await createClient();
     const { data, error } = await supabase.auth.getUser();
 
-    if (error) return NextResponse.json({ error: error.name }, { status: 403 });
+    if (error) return NextResponse.json({
+        error: JobAnalysisErrors.AuthenticationFailed
+    }, { status: 403 });
+
+    const { input } = await req.json();
+
+    if (!input)
+        return NextResponse.json({ error: JobAnalysisErrors.ContentMissing }, { status: 400 });
 
     let { planType, usage, usageLastReset } = data.user
         .user_metadata as UserMetadata;
@@ -43,15 +53,10 @@ export async function POST(req: NextRequest) {
 
     if (usage >= maxUsage)
         return NextResponse.json(
-            { error: "Not enough credits" },
-            { status: 400 },
+            { error: JobAnalysisErrors.NotEnoughCredits, accountType: data.user.is_anonymous ? "anon" : "perma" },
+            { status: 403 },
         );
     await updateUserMetadata(data.user.id, { usage: usage + 1 });
-
-    const { input } = await req.json();
-
-    if (!input)
-        return NextResponse.json({ error: "Missing input" }, { status: 400 });
 
     const flags = await generateFlags(input);
 
