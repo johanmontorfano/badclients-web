@@ -30,7 +30,7 @@ export async function signup(formData: FormData) {
                 nickname: formData.get("nickname") as string,
                 planType: PlanTiers.Free,
                 usageLastReset: Date.now(),
-                usage: 0
+                usage: 0,
             },
         },
     });

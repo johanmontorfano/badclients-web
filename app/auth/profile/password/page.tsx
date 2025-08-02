@@ -19,7 +19,7 @@ export default function Page() {
     const [mode, setMode] = useState<OperationType | "loading">("loading");
     const [state, action, pending] = useActionState(
         handleChangePassword.bind(null, mode),
-        { status: "" }
+        { status: "" },
     );
     const [email, setEmail] = useState("");
 
