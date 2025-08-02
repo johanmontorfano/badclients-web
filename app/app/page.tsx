@@ -63,36 +63,36 @@ export default function Page() {
     }
 
     return (
-            <div className="grow flex flex-col items-center justify-center p-8">
-                {errorCode !== "" && (
-                    <div className="alert alert-error mb-4">
-                        <span className="text-sm">{errorCode}</span>
-                    </div>
-                )}
-                {analysis.length > 0 ? <JobAnalysis flags={analysis} /> : null}
-                <div className="join">
-                    <input
-                        className="input input-bordered w-[600px] mb-4 join-item"
-                        placeholder="Paste the freelance job post here..."
-                        value={input}
-                        disabled={loading}
-                        onChange={(e) => {
-                            setErrorCode("");
-                            setInput(e.target.value);
-                        }}
-                    />
-                    <button
-                        className="btn btn-primary mb-6 join-item"
-                        onClick={analyzeJobPost}
-                        disabled={input.trim().length < 20 || loading}
-                    >
-                        {loading ? (
-                            <span className="loading loading-spinner" />
-                        ) : (
-                            "Analyze"
-                        )}
-                    </button>
+        <div className="grow flex flex-col items-center justify-center p-8">
+            {errorCode !== "" && (
+                <div className="alert alert-error mb-4">
+                    <span className="text-sm">{errorCode}</span>
                 </div>
+            )}
+            {analysis.length > 0 ? <JobAnalysis flags={analysis} /> : null}
+            <div className="join">
+                <input
+                    className="input input-bordered w-[600px] mb-4 join-item"
+                    placeholder="Paste the freelance job post here..."
+                    value={input}
+                    disabled={loading}
+                    onChange={(e) => {
+                        setErrorCode("");
+                        setInput(e.target.value);
+                    }}
+                />
+                <button
+                    className="btn btn-primary mb-6 join-item"
+                    onClick={analyzeJobPost}
+                    disabled={input.trim().length < 20 || loading}
+                >
+                    {loading ? (
+                        <span className="loading loading-spinner" />
+                    ) : (
+                        "Analyze"
+                    )}
+                </button>
             </div>
+        </div>
     );
 }
