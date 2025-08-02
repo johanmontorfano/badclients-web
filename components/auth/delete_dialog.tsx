@@ -58,8 +58,8 @@ export function DeleteDialog() {
                         <p className="tex-red-400">{error}</p>
                     ) : null}
                     <ul className="list-disc ml-4">
-                        {DELETION_IMPLICATIONS.map((d) => (
-                            <li>
+                        {DELETION_IMPLICATIONS.map((d, i) => (
+                            <li key={i}>
                                 <p>{d}</p>
                             </li>
                         ))}
