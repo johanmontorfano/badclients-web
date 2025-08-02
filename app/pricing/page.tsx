@@ -1,3 +1,7 @@
+"use client";
+
+import { redirect } from "next/navigation";
+
 export default function Page() {
     const tiers = [
         {
@@ -10,6 +14,8 @@ export default function Page() {
                 "Lifetime usage",
                 "Early access",
             ],
+            url: "/auth/signup",
+            mode: "redirect",
         },
         {
             name: "Hunter",
@@ -21,6 +27,8 @@ export default function Page() {
                 "Job knowledge database access",
             ],
             missing: ["Lifetime usage", "Early access"],
+            url: "/api/checkout?planID=1",
+            mode: "call",
         },
         {
             name: "Lifetime Hunter",
@@ -36,8 +44,23 @@ export default function Page() {
             ],
             missing: [],
             badge: "Limited Offer",
+            url: "/api/checkout?planID=2",
+            mode: "call",
         },
     ];
+
+    async function handleClick(url: string, mode: string) {
+        if (mode === "redirect") redirect(url);
+        else {
+            const res = await fetch(url, { method: "POST" });
+
+            if (res.ok) {
+                const { url } = await res.json();
+
+                redirect(url);
+            }
+        }
+    }
 
     return (
         <div className="py-12 px-4 sm:px-6 lg:px-8">
@@ -106,9 +129,11 @@ export default function Page() {
                             <div>
                                 <button
                                     className="btn btn-primary btn-block"
-                                    disabled
+                                    onClick={() =>
+                                        handleClick(tier.url, tier.mode)
+                                    }
                                 >
-                                    Coming soon
+                                    Continue
                                 </button>
                             </div>
                         </div>
