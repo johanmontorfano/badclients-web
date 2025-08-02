@@ -25,10 +25,20 @@ export default function Page() {
 
         if (!res.ok) {
             setLoading(false);
-            if (data.error === JobAnalysisErrors.NotEnoughCredits && data.accountType === "anon")
-                setErrorCode("No credits remaining, create an account to continue.");
-            else if (data.error === JobAnalysisErrors.NotEnoughCredits && data.accountType === "perma")
-                setErrorCode("No credits remaining, check your account dashboard.");
+            if (
+                data.error === JobAnalysisErrors.NotEnoughCredits &&
+                data.accountType === "anon"
+            )
+                setErrorCode(
+                    "No credits remaining, create an account to continue.",
+                );
+            else if (
+                data.error === JobAnalysisErrors.NotEnoughCredits &&
+                data.accountType === "perma"
+            )
+                setErrorCode(
+                    "No credits remaining, check your account dashboard.",
+                );
             if (data.error === JobAnalysisErrors.AuthenticationFailed)
                 setErrorCode("Failed to retrieve account.");
             if (data.error === JobAnalysisErrors.ContentMissing)
@@ -63,11 +73,11 @@ export default function Page() {
                     BadClients — Spot Bad Freelance Jobs Instantly
                 </h1>
                 <p className="text-red-500">DEMO VIDEO IN BACKGROUND</p>
-                    {errorCode !== "" && (
-                        <div className="alert alert-error mb-4">
-                            <span className="text-sm">{errorCode}</span>
-                        </div>
-                    )}
+                {errorCode !== "" && (
+                    <div className="alert alert-error mb-4">
+                        <span className="text-sm">{errorCode}</span>
+                    </div>
+                )}
                 <div className="join">
                     <input
                         className="input input-bordered w-[600px] mb-4 join-item"

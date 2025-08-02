@@ -7,19 +7,18 @@ import { updateUserMetadata, UserMetadata } from "@/utils/supabase/users";
 import { NextRequest, NextResponse } from "next/server";
 
 function unwrapMarkdown(text: any): any {
-    if (typeof text === "object")
-        return text;
+    if (typeof text === "object") return text;
 
     const trimmed = text.trim();
 
-  if (trimmed.startsWith('```') && trimmed.endsWith('```')) {
-    const lines = trimmed.split('\n');
+    if (trimmed.startsWith("```") && trimmed.endsWith("```")) {
+        const lines = trimmed.split("\n");
 
-    if (lines.length >= 3)
-      return JSON.parse(lines.slice(1, -1).join('\n').trim());
-  }
+        if (lines.length >= 3)
+            return JSON.parse(lines.slice(1, -1).join("\n").trim());
+    }
 
-  return text;
+    return text;
 }
 
 export async function POST(req: NextRequest) {
@@ -29,14 +28,21 @@ export async function POST(req: NextRequest) {
     const supabase = await createClient();
     const { data, error } = await supabase.auth.getUser();
 
-    if (error) return NextResponse.json({
-        error: JobAnalysisErrors.AuthenticationFailed
-    }, { status: 403 });
+    if (error)
+        return NextResponse.json(
+            {
+                error: JobAnalysisErrors.AuthenticationFailed,
+            },
+            { status: 403 },
+        );
 
     const { input } = await req.json();
 
     if (!input)
-        return NextResponse.json({ error: JobAnalysisErrors.ContentMissing }, { status: 400 });
+        return NextResponse.json(
+            { error: JobAnalysisErrors.ContentMissing },
+            { status: 400 },
+        );
 
     let { planType, usage, usageLastReset } = data.user
         .user_metadata as UserMetadata;
@@ -53,7 +59,10 @@ export async function POST(req: NextRequest) {
 
     if (usage >= maxUsage)
         return NextResponse.json(
-            { error: JobAnalysisErrors.NotEnoughCredits, accountType: data.user.is_anonymous ? "anon" : "perma" },
+            {
+                error: JobAnalysisErrors.NotEnoughCredits,
+                accountType: data.user.is_anonymous ? "anon" : "perma",
+            },
             { status: 403 },
         );
     await updateUserMetadata(data.user.id, { usage: usage + 1 });
@@ -104,6 +113,7 @@ description: write a fast description of the job. It must be a plain one-line st
 
     const content = await response.json();
 
-    if (content.choices) return unwrapMarkdown(content.choices[0].message.content);
+    if (content.choices)
+        return unwrapMarkdown(content.choices[0].message.content);
     return content;
 }
