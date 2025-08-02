@@ -48,7 +48,7 @@ export async function middleware(req: NextRequest) {
         return withSupabaseCookies(
             NextResponse.redirect(
                 origin + "/api/users/anon?next=" + origin + "/app",
-                { headers }
+                { headers },
             ),
             cookies,
         );
@@ -77,7 +77,10 @@ export async function middleware(req: NextRequest) {
             cookies,
         );
 
-    return withSupabaseCookies(NextResponse.next({ request: req, headers }), cookies);
+    return withSupabaseCookies(
+        NextResponse.next({ request: req, headers }),
+        cookies,
+    );
 }
 
 export const config = {

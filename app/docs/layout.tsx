@@ -1,36 +1,34 @@
-import type { Metadata } from 'next';
+import type { Metadata } from "next";
 import { DocsNavigation } from "@/components/docs/navigation";
-import { getMDXMetadata } from '@/utils/docs/mdx';
-import { headers } from 'next/headers';
+import { getMDXMetadata } from "@/utils/docs/mdx";
+import { headers } from "next/headers";
 
 export async function generateMetadata(): Promise<Metadata> {
     const headerList = await headers();
     const pathname = headerList.get("x-pathname")!;
     const metadata = getMDXMetadata(pathname.slice(6).split("/"));
 
-    console.log(metadata, pathname.slice(6).split("/"));
+    if (!metadata) {
+        return {
+            title: "Documentation",
+            description: "Documentation for Bad Clients",
+        };
+    }
 
-  if (!metadata) {
     return {
-      title: "Documentation",
-      description: "Documentation for Bad Clients",
+        title: metadata.title,
+        description: metadata.description,
+        openGraph: {
+            title: metadata.title,
+            description: metadata.description,
+            type: "article",
+        },
+        twitter: {
+            card: "summary",
+            title: metadata.title,
+            description: metadata.description,
+        },
     };
-  }
-
-  return {
-    title: metadata.title,
-    description: metadata.description,
-    openGraph: {
-      title: metadata.title,
-      description: metadata.description,
-      type: "article",
-    },
-    twitter: {
-      card: "summary",
-      title: metadata.title,
-      description: metadata.description,
-    },
-  };
 }
 
 export default function DocsLayout(props: { children: React.ReactNode }) {
