@@ -55,9 +55,9 @@ export async function Navbar() {
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
-                        <li>
-                            <a href="/app">Analyze</a>
-                        </li>
+                    <li>
+                        <a href="/app">Analyze</a>
+                    </li>
                     <li>
                         <a href="/docs">Documentation</a>
                     </li>
