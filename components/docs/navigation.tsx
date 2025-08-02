@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
 
 const links = [
     { href: "/docs", label: "Overview" },
@@ -13,7 +12,6 @@ const links = [
 
 export function DocsNavigation() {
     const pathname = usePathname();
-    const [sidebarOpen, setSidebarOpen] = useState(false);
 
     // Generate breadcrumbs from current path
     const generateBreadcrumbs = () => {
