@@ -1,8 +1,79 @@
-import { NextRequest } from "next/server";
-import { updateSession } from "./utils/supabase/middleware";
+import { createServerClient } from "@supabase/ssr";
+import { NextRequest, NextResponse } from "next/server";
+import { origin } from "@/utils/origin";
+
+function withSupabaseCookies(response: NextResponse, cookiesToSet: any[]) {
+    cookiesToSet.forEach(({ name, value, options }) => {
+        response.cookies.set(name, value, options);
+    });
+    return response;
+}
 
 export async function middleware(req: NextRequest) {
-    return await updateSession(req);
+    let cookies: any[] = [];
+
+    const supabase = createServerClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL!,
+        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+        {
+            cookies: {
+                getAll() {
+                    return req.cookies.getAll();
+                },
+
+                setAll(cookiesToSet: any) {
+                    cookiesToSet.forEach(({ name, value, options }) => {
+                        req.cookies.set(name, value);
+                    });
+                    cookies = cookiesToSet;
+                },
+            },
+        },
+    );
+    const currentURL = new URL(req.url);
+    const user = await supabase.auth.getUser();
+
+    const loggedIn = user.data.user !== null;
+    const anon = loggedIn ? user.data.user!.is_anonymous : false;
+
+    // Visitor wants to send a prompt: redirected to anonymous sign-in then app
+    if (
+        !loggedIn &&
+        req.nextUrl.pathname === "/app" &&
+        currentURL.pathname !== "/api/users/anon"
+    )
+        return withSupabaseCookies(
+            NextResponse.redirect(
+                origin + "/api/users/anon?next=" + origin + "/app",
+            ),
+            cookies,
+        );
+    // Anonymous user wants to go to authenticated pages other than /app:
+    // redirected to /auth/signup
+    if (
+        loggedIn &&
+        anon &&
+        req.nextUrl.pathname.startsWith("/auth") &&
+        req.nextUrl.pathname !== "/auth/signup"
+    )
+        return withSupabaseCookies(
+            NextResponse.redirect(origin + "/auth/signup"),
+            cookies,
+        );
+
+    // Logged in user goes to authentication pages: redirect to profile page
+    if (
+        loggedIn &&
+        !anon &&
+        (req.nextUrl.pathname === "/auth/login" ||
+            req.nextUrl.pathname === "/auth/signup")
+    )
+        return withSupabaseCookies(
+            NextResponse.redirect(origin + "/auth/profile"),
+            cookies,
+        );
+
+    return withSupabaseCookies(NextResponse.next({ request: req }), cookies);
 }
 
 export const config = {
