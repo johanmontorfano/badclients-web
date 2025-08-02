@@ -1,54 +1,55 @@
 "use client";
 
+import { planUsage } from "@/utils/stripe/plans";
 import { redirect } from "next/navigation";
 
-export default function Page() {
-    const tiers = [
-        {
-            name: "Free",
-            price: "€0",
-            description: "Perfect for light and casual usage.",
-            features: ["5 requests per day", "Extension support"],
-            missing: [
-                "Job knowledge database access",
-                "Lifetime usage",
-                "Early access",
-            ],
-            url: "/auth/signup",
-            mode: "redirect",
-        },
-        {
-            name: "Hunter",
-            price: "€5/month",
-            description: "Ideal for active freelancers seeking opportunities.",
-            features: [
-                "500 requests per day",
-                "Extension support",
-                "Job knowledge database access",
-            ],
-            missing: ["Lifetime usage", "Early access"],
-            url: "/api/checkout?planID=1",
-            mode: "call",
-        },
-        {
-            name: "Lifetime Hunter",
-            price: "€59 one-time",
-            description:
-                "Everything in Hunter with lifetime access. Limited early supporter offer.",
-            features: [
-                "Unlimited daily requests",
-                "Extension support",
-                "Job knowledge database access",
-                "Lifetime usage",
-                "Early access",
-            ],
-            missing: [],
-            badge: "Limited Offer",
-            url: "/api/checkout?planID=2",
-            mode: "call",
-        },
-    ];
+const tiers = [
+    {
+        name: "Free",
+        price: "€0",
+        description: "Perfect for light and casual usage.",
+        features: ["5 requests per day", "Extension support"],
+        missing: [
+            "Job knowledge database access",
+            "Lifetime usage",
+            "Early access",
+        ],
+        url: "/auth/signup",
+        mode: "redirect",
+    },
+    {
+        name: "Hunter",
+        price:  `€5/month`,
+        description: "Ideal for active freelancers seeking opportunities.",
+        features: [
+            `${planUsage[1].usage} requests per day`,
+            "Extension support",
+            "Job knowledge database access",
+        ],
+        missing: ["Lifetime usage", "Early access"],
+        url: "/api/checkout?planID=1",
+        mode: "call",
+    },
+    {
+        name: "Lifetime Hunter",
+        price: "€59 one-time",
+        description:
+            "Everything in Hunter with lifetime access. Limited early supporter offer.",
+        features: [
+            `${planUsage[2].usage} requests per day`,
+            "Extension support",
+            "Job knowledge database access",
+            "Lifetime usage",
+            "Early access",
+        ],
+        missing: [],
+        badge: "Limited Offer",
+        url: "/api/checkout?planID=2",
+        mode: "call",
+    },
+];
 
+export default function Page() {
     async function handleClick(url: string, mode: string) {
         if (mode === "redirect") redirect(url);
         else {
