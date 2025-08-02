@@ -1,6 +1,6 @@
 "use client";
 
-export default function JobAnalysis(props: { flags: Record<string, any> }) {
+export function JobAnalysis(props: { flags: Record<string, any> }) {
     const { score } = props.flags;
 
     return (

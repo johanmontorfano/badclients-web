@@ -1,6 +1,6 @@
 "use client";
 
-import JobAnalysis from "@/components/job_analysis";
+import { JobAnalysis } from "@/components/job_analysis";
 import { useState } from "react";
 
 export default function Page() {
