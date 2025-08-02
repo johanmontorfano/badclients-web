@@ -2,6 +2,9 @@
 
 import { JobAnalysisErrors } from "@/components/job_analysis/data";
 import { JobAnalysis } from "@/components/job_analysis/job_analysis";
+import { JobInputSection } from "@/components/job_analysis/job_input";
+import { PlanTiers, planUsage } from "@/utils/stripe/plans";
+import { createClient } from "@/utils/supabase/client";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -12,17 +15,34 @@ export default function Page() {
 
     const [input, setInput] = useState(params.get("home_input_content") || "");
     const [errorCode, setErrorCode] = useState("");
-    const [analysis, setAnalysis] = useState([]);
+    const [analysis, setAnalysis] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [remaining, setRemaining] = useState(3);
+    const [planTimeRange, setPlanTimeRange] = useState<"day" | "month">("day");
 
     useEffect(() => {
         if (params.has("home_input_content")) {
             analyzeJobPost();
             router.replace("/app");
         }
+
+        getRemainingCredits();
     }, []);
 
-    // TODO: Error handling
+    async function getRemainingCredits() {
+        const supabase = createClient();
+        const user = await supabase.auth.getUser();
+
+        if (user.data.user) {
+            const planData =
+                planUsage[user.data.user.user_metadata.planType as PlanTiers];
+            const usage = user.data.user.user_metadata.usage;
+
+            setRemaining(planData.usage - usage);
+            setPlanTimeRange(planData.timeRange);
+        }
+    }
+
     async function analyzeJobPost() {
         if (input.trim().length < 20) return;
 
@@ -59,39 +79,38 @@ export default function Page() {
         }
 
         setAnalysis(JSON.parse(data.flags));
+        setRemaining(data.remainingUsages);
         setLoading(false);
     }
 
     return (
-        <div className="grow flex flex-col items-center justify-center p-8">
+        <div className="grow flex flex-col items-center justify-between p-2">
             {errorCode !== "" && (
                 <div className="alert alert-error mb-4">
                     <span className="text-sm">{errorCode}</span>
                 </div>
             )}
-            {analysis.length > 0 ? <JobAnalysis flags={analysis} /> : null}
-            <div className="join">
-                <input
-                    className="input input-bordered w-[600px] mb-4 join-item"
-                    placeholder="Paste the freelance job post here..."
-                    value={input}
-                    disabled={loading}
-                    onChange={(e) => {
-                        setErrorCode("");
-                        setInput(e.target.value);
-                    }}
+            {analysis ? (
+                <div className="grow flex justify-center items-center mb-8">
+                    <JobAnalysis flags={analysis} />
+                </div>
+            ) : null}
+            <div
+                className={
+                    analysis
+                        ? "w-full"
+                        : "grow flex justify-center items-center w-full"
+                }
+            >
+                <JobInputSection
+                    input={input}
+                    loading={loading}
+                    requestsLeft={remaining}
+                    planTimeRange={planTimeRange}
+                    setInput={setInput}
+                    setErrorCode={setErrorCode}
+                    analyzeJobPost={analyzeJobPost}
                 />
-                <button
-                    className="btn btn-primary mb-6 join-item"
-                    onClick={analyzeJobPost}
-                    disabled={input.trim().length < 20 || loading}
-                >
-                    {loading ? (
-                        <span className="loading loading-spinner" />
-                    ) : (
-                        "Analyze"
-                    )}
-                </button>
             </div>
         </div>
     );

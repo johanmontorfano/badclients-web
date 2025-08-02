@@ -1,10 +1,12 @@
 "use client";
 
-import { JobAnalysisErrors } from "@/components/job_analysis/data";
-import { JobAnalysis } from "@/components/job_analysis/job_analysis";
+import { JobInputSection } from "@/components/job_analysis/job_input";
+import { origin } from "@/utils/origin";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function Page() {
+    const router = useRouter();
     const [input, setInput] = useState("");
 
     return (
@@ -13,20 +15,18 @@ export default function Page() {
                 BadClients — Spot Bad Freelance Jobs Instantly
             </h1>
             <p className="text-red-500">DEMO VIDEO IN BACKGROUND</p>
-            <form className="join" action="/app">
-                <input
-                    name="home_input_content"
-                    className="input input-bordered w-[600px] mb-4 join-item"
-                    placeholder="Paste the freelance job post here..."
-                    minLength={20}
-                />
-                <button
-                    type="submit"
-                    className="btn btn-primary mb-6 join-item"
-                >
-                    Analyze
-                </button>
-            </form>
+            <JobInputSection
+                input={input}
+                setInput={setInput}
+                setErrorCode={() => {}}
+                loading={false}
+                analyzeJobPost={() => {
+                    const url = new URL(origin + "/app");
+                    url.searchParams.append("home_input_content", input);
+
+                    router.push(url.toString());
+                }}
+            />
             <section className="max-w-3xl text-center mb-8 px-4">
                 <p className="mb-4 text-lg max-w-xl mx-auto leading-relaxed">
                     BadClients helps freelancers quickly spot red flags in job
