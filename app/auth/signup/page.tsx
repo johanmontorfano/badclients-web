@@ -3,7 +3,7 @@ import Link from "next/link";
 import { signup } from "../actions";
 
 export default async function SignupPage(props: {
-    searchParams: Promise<{ error: boolean }>
+    searchParams: Promise<{ error: boolean }>;
 }) {
     const params = await props.searchParams;
 
@@ -16,13 +16,27 @@ export default async function SignupPage(props: {
                 <h1 className="text-lg text-base-content/80">
                     Sign up for Bad Clients
                 </h1>
-                {!params.error ? null :
+                {!params.error ? null : (
                     <p className="text-red-400">Account creation failed</p>
-                }
+                )}
             </div>
             <div className="card bg-base-100 shadow-lg border border-base-300">
                 <div className="card-body p-6">
                     <form className="space-y-4">
+                        <div className="form-control">
+                            <label className="label pb-1">
+                                <span className="label-text text-sm font-medium">
+                                    Nickname
+                                </span>
+                            </label>
+                            <input
+                                name="nickname"
+                                placeholder="Enter your nickname"
+                                className="input input-bordered w-full focus:input-primary"
+                                required
+                                autoFocus
+                            />
+                        </div>
                         <div className="form-control">
                             <label className="label pb-1">
                                 <span className="label-text text-sm font-medium">
@@ -35,10 +49,8 @@ export default async function SignupPage(props: {
                                 placeholder="Enter your email"
                                 className="input input-bordered w-full focus:input-primary"
                                 required
-                                autoFocus
                             />
                         </div>
-
                         <div className="form-control">
                             <label className="label pb-1">
                                 <span className="label-text text-sm font-medium">

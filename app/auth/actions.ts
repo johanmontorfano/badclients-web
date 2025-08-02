@@ -3,18 +3,18 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
+import { PlanTiers } from "@/utils/stripe/plans";
 
 export async function login(formData: FormData) {
     const supabase = await createClient();
-
-    const data = {
+    const { error } = await supabase.auth.signInWithPassword({
         email: formData.get("email") as string,
         password: formData.get("password") as string,
-    };
+    });
 
-    const { error } = await supabase.auth.signInWithPassword(data);
-
-    if (error) redirect("/auth/login?error=true");
+    if (error && error.code === "email_not_confirmed")
+        redirect("/auth/login?error=email_verification");
+    else if (error) redirect("/auth/login?error=any");
 
     revalidatePath("/", "layout");
     redirect("/");
@@ -22,16 +22,19 @@ export async function login(formData: FormData) {
 
 export async function signup(formData: FormData) {
     const supabase = await createClient();
-
-    const data = {
+    const { error } = await supabase.auth.signUp({
         email: formData.get("email") as string,
         password: formData.get("password") as string,
-    };
-
-    const { error } = await supabase.auth.signUp(data);
+        options: {
+            data: {
+                nickname: formData.get("nickname") as string,
+                planTier: PlanTiers.Free,
+            },
+        },
+    });
 
     if (error) redirect("/auth/signup?error=true");
 
     revalidatePath("/", "layout");
-    redirect("/");
+    redirect("/auth/signup/email_verification");
 }

@@ -3,7 +3,7 @@ import { BackButton } from "@/components/auth/back_button";
 import { login } from "../actions";
 
 export default async function LoginPage(props: {
-    searchParams: Promise<{ error: boolean }>
+    searchParams: Promise<{ error: string }>;
 }) {
     const params = await props.searchParams;
 
@@ -16,9 +16,16 @@ export default async function LoginPage(props: {
                 <h1 className="text-lg text-base-content/80">
                     Log in to Bad Clients
                 </h1>
-                {!params.error ? null :
+                {!params.error ? null : params.error ===
+                  "email_verification" ? (
+                    <p className="text-red-400">
+                        Verify your e-mail address first
+                    </p>
+                ) : params.error === "email_ok" ? (
+                    <p className="text-green-400">E-mail verified!</p>
+                ) : (
                     <p className="text-red-400">Invalid credentials</p>
-                }
+                )}
             </div>
             <div className="card bg-base-100 shadow-lg border border-base-300">
                 <div className="card-body p-6">
