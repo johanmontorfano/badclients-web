@@ -28,7 +28,7 @@ export async function signup(formData: FormData) {
         options: {
             data: {
                 nickname: formData.get("nickname") as string,
-                planTier: PlanTiers.Free,
+                planType: PlanTiers.Free,
             },
         },
     });
