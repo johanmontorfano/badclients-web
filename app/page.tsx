@@ -1,35 +1,23 @@
-"use client";
+import type { Metadata } from "next";
+import { JobInputHero } from "@/components/job_analysis/job_input_hero";
 
-import { JobInputSection } from "@/components/job_analysis/job_input";
-import { origin } from "@/utils/origin";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+export const metadata: Metadata = {
+    title: "Avoid loosing time and money for sketchy clients with Bad Clients",
+    description:
+        'Prevent yourself from experiencing another "Can you do it cheaper line" with Bad Clients. This tool will help you analyze any freelance proposal and avoid sketchy clients with unrealistic expectations. You can even download the extension (Chrome, Edge, Firefox) to see in real-time on Upwork, Fiverr (and soon others) bad proposals.',
+};
 
 export default function Page() {
-    const router = useRouter();
-    const [input, setInput] = useState("");
-
     return (
         <div className="grow flex flex-col items-center justify-center p-8">
             <h1 className="text-4xl font-bold mb-6 text-center">
                 BadClients — Spot Bad Freelance Jobs Instantly
             </h1>
             <p className="text-red-500">DEMO VIDEO IN BACKGROUND</p>
-            <JobInputSection
-                input={input}
-                setInput={setInput}
-                setErrorCode={() => {}}
-                loading={false}
-                analyzeJobPost={() => {
-                    const url = new URL(origin + "/app");
-                    url.searchParams.append("home_input_content", input);
-
-                    router.push(url.toString());
-                }}
-            />
+            <JobInputHero />
             <section className="max-w-3xl text-center mb-8 px-4">
                 <p className="mb-4 text-lg max-w-xl mx-auto leading-relaxed">
-                    BadClients helps freelancers quickly spot red flags in job
+                    Bad Clients helps freelancers quickly spot red flags in job
                     posts so you can avoid wasted time and sketchy clients. Use
                     our browser extensions to get reviews directly on Upwork,
                     Fiverr, and more.

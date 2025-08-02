@@ -2,6 +2,13 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Navbar } from "@/components/navbar";
 
+export const metadata: Metadata = {
+    title: {
+        default: "Bad Clients",
+        template: "%s — Bad Clients",
+    },
+};
+
 export default function RootLayout(props: { children: React.ReactNode }) {
     return (
         <html lang="en">

@@ -1,3 +1,9 @@
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Fatal Error",
+};
+
 export default function Page() {
     return (
         <div>

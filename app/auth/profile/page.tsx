@@ -9,6 +9,11 @@ import { PlanTiers, planUsage } from "@/utils/stripe/plans";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import { DeleteDialog } from "@/components/auth/delete_dialog";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Profile",
+};
 
 export default async function Page() {
     const supabase = await createClient();

@@ -1,6 +1,11 @@
 import { BackButton } from "@/components/auth/back_button";
 import Link from "next/link";
 import { signup } from "../actions";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Sign Up",
+};
 
 export default async function SignupPage(props: {
     searchParams: Promise<{ error: boolean }>;

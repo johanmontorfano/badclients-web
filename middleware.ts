@@ -10,7 +10,10 @@ function withSupabaseCookies(response: NextResponse, cookiesToSet: any[]) {
 }
 
 export async function middleware(req: NextRequest) {
+    const headers = new Headers(req.headers);
     let cookies: any[] = [];
+
+    headers.set("x-pathname", req.nextUrl.pathname);
 
     const supabase = createServerClient(
         process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -45,6 +48,7 @@ export async function middleware(req: NextRequest) {
         return withSupabaseCookies(
             NextResponse.redirect(
                 origin + "/api/users/anon?next=" + origin + "/app",
+                { headers }
             ),
             cookies,
         );
@@ -57,7 +61,7 @@ export async function middleware(req: NextRequest) {
         req.nextUrl.pathname !== "/auth/signup"
     )
         return withSupabaseCookies(
-            NextResponse.redirect(origin + "/auth/signup"),
+            NextResponse.redirect(origin + "/auth/signup", { headers }),
             cookies,
         );
 
@@ -69,11 +73,11 @@ export async function middleware(req: NextRequest) {
             req.nextUrl.pathname === "/auth/signup")
     )
         return withSupabaseCookies(
-            NextResponse.redirect(origin + "/auth/profile"),
+            NextResponse.redirect(origin + "/auth/profile", { headers }),
             cookies,
         );
 
-    return withSupabaseCookies(NextResponse.next({ request: req }), cookies);
+    return withSupabaseCookies(NextResponse.next({ request: req, headers }), cookies);
 }
 
 export const config = {

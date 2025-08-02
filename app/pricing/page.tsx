@@ -1,7 +1,10 @@
-"use client";
-
+import { PricingButton } from "@/components/payment/tier_button";
 import { planUsage } from "@/utils/stripe/plans";
-import { redirect } from "next/navigation";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Pricing",
+};
 
 const tiers = [
     {
@@ -50,19 +53,6 @@ const tiers = [
 ];
 
 export default function Page() {
-    async function handleClick(url: string, mode: string) {
-        if (mode === "redirect") redirect(url);
-        else {
-            const res = await fetch(url, { method: "POST" });
-
-            if (res.ok) {
-                const { url } = await res.json();
-
-                redirect(url);
-            }
-        }
-    }
-
     return (
         <div className="py-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-7xl mx-auto text-center">
@@ -128,14 +118,10 @@ export default function Page() {
                                 </ul>
                             </div>
                             <div>
-                                <button
-                                    className="btn btn-primary btn-block"
-                                    onClick={() =>
-                                        handleClick(tier.url, tier.mode)
-                                    }
-                                >
-                                    Continue
-                                </button>
+                                <PricingButton
+                                    url={tier.url}
+                                    mode={tier.mode}
+                                />
                             </div>
                         </div>
                     </div>

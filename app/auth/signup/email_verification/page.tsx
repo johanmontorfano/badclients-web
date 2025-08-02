@@ -1,4 +1,9 @@
+import { Metadata } from "next";
 import { BsSendCheck } from "react-icons/bs";
+
+export const metadata: Metadata = {
+    title: "Verify your e-mail",
+};
 
 export default function Page() {
     return (
