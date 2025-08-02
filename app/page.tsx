@@ -6,101 +6,27 @@ import { useState } from "react";
 
 export default function Page() {
     const [input, setInput] = useState("");
-    const [errorCode, setErrorCode] = useState("");
-    const [analysis, setAnalysis] = useState([]);
-    const [loading, setLoading] = useState(false);
-
-    // TODO: Error handling
-    async function analyzeJobPost() {
-        if (input.trim().length < 20) return;
-
-        setLoading(true);
-        setErrorCode("");
-
-        const res = await fetch("/api/jobs/analysis", {
-            method: "POST",
-            body: JSON.stringify({ input }),
-        });
-        const data = await res.json();
-
-        if (!res.ok) {
-            setLoading(false);
-            if (
-                data.error === JobAnalysisErrors.NotEnoughCredits &&
-                data.accountType === "anon"
-            )
-                setErrorCode(
-                    "No credits remaining, create an account to continue.",
-                );
-            else if (
-                data.error === JobAnalysisErrors.NotEnoughCredits &&
-                data.accountType === "perma"
-            )
-                setErrorCode(
-                    "No credits remaining, check your account dashboard.",
-                );
-            if (data.error === JobAnalysisErrors.AuthenticationFailed)
-                setErrorCode("Failed to retrieve account.");
-            if (data.error === JobAnalysisErrors.ContentMissing)
-                setErrorCode("Request empty");
-            return;
-        }
-
-        setAnalysis(JSON.parse(data.flags));
-        document.getElementById("analyze_modal")!.showModal();
-        setLoading(false);
-    }
 
     return (
-        <>
-            <dialog id="analyze_modal" className="modal">
-                <div className="modal-box">
-                    <JobAnalysis flags={analysis} />
-                    <div className="modal-action">
-                        <form method="dialog">
-                            <button
-                                className="btn"
-                                onClick={() => setInput("")}
-                            >
-                                Close
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </dialog>
             <div className="grow flex flex-col items-center justify-center p-8">
                 <h1 className="text-4xl font-bold mb-6 text-center">
                     BadClients — Spot Bad Freelance Jobs Instantly
                 </h1>
                 <p className="text-red-500">DEMO VIDEO IN BACKGROUND</p>
-                {errorCode !== "" && (
-                    <div className="alert alert-error mb-4">
-                        <span className="text-sm">{errorCode}</span>
-                    </div>
-                )}
-                <div className="join">
+                <form className="join" action="/app">
                     <input
+                        name="home_input_content"
                         className="input input-bordered w-[600px] mb-4 join-item"
                         placeholder="Paste the freelance job post here..."
-                        value={input}
-                        disabled={loading}
-                        onChange={(e) => {
-                            setErrorCode("");
-                            setInput(e.target.value);
-                        }}
+                        minLength={20}
                     />
                     <button
+                    type="submit"
                         className="btn btn-primary mb-6 join-item"
-                        onClick={analyzeJobPost}
-                        disabled={input.trim().length < 20 || loading}
                     >
-                        {loading ? (
-                            <span className="loading loading-spinner" />
-                        ) : (
-                            "Analyze"
-                        )}
+                        Analyze
                     </button>
-                </div>
+                </form>
                 <section className="max-w-3xl text-center mb-8 px-4">
                     <p className="mb-4 text-lg max-w-xl mx-auto leading-relaxed">
                         BadClients helps freelancers quickly spot red flags in
@@ -159,6 +85,5 @@ export default function Page() {
                     </a>
                 </section>
             </div>
-        </>
     );
 }
