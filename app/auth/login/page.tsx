@@ -61,7 +61,7 @@ export default async function LoginPage(props: {
                             />
                             <label className="label pt-1">
                                 <Link
-                                    href="/auth/forgot-password"
+                                    href="/auth/profile/password?type=forgot"
                                     className="label-text-alt text-xs link link-primary"
                                 >
                                     Forgot password?

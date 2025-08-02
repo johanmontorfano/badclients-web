@@ -16,7 +16,9 @@ export async function GET(request: NextRequest) {
         const { error } = await supabase.auth.verifyOtp({ type, token_hash });
 
         if (!error)
-            return NextResponse.redirect(origin + "/auth/profile?error=email_ok");
+            return NextResponse.redirect(
+                origin + "/auth/profile?error=email_ok",
+            );
     }
     return NextResponse.redirect(origin + "/error");
 }
