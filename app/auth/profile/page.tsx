@@ -1,16 +1,14 @@
 import {
     BsCreditCard2Front,
     BsFillPersonXFill,
-    BsFillTrashFill,
-    BsGearWideConnected,
     BsKey,
     BsQuestionCircle,
-    BsX,
 } from "react-icons/bs";
 import { BackButton } from "@/components/auth/back_button";
 import { PlanTiers } from "@/utils/stripe/plans";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
+import { DeleteDialog } from "@/components/auth/delete_dialog";
 
 export default async function Page() {
     const supabase = await createClient();
@@ -97,7 +95,11 @@ export default async function Page() {
                             </div>
                         </button>
                         <a
-                            href={user.user_metadata.planType === PlanTiers.Free ? "/pricing" : "/api/customer_portal"}
+                            href={
+                                user.user_metadata.planType === PlanTiers.Free
+                                    ? "/pricing"
+                                    : "/api/customer_portal"
+                            }
                             className={`btn btn-outline justify-start h-auto py-4 ${user.user_metadata.planType === PlanTiers.Lifetime ? "btn-disabled" : ""}`}
                         >
                             <div className="flex items-center">
@@ -142,19 +144,7 @@ export default async function Page() {
                                 </div>
                             </div>
                         </a>
-                        <button className="btn btn-error btn-outline justify-start h-auto py-4">
-                            <div className="flex items-center">
-                                <BsFillTrashFill size={24} />
-                                <div className="text-left ml-4">
-                                    <div className="font-medium">
-                                        Delete Account
-                                    </div>
-                                    <div className="text-sm text-base-content/60">
-                                        Permanently delete account
-                                    </div>
-                                </div>
-                            </div>
-                        </button>
+                        <DeleteDialog />
                     </div>
                 </div>
             </div>
