@@ -69,7 +69,7 @@ export async function POST(req: NextRequest) {
 
     const flags = await generateFlags(input);
 
-    return NextResponse.json({ flags });
+    return NextResponse.json({ flags, remainingUsages: maxUsage - usage - 1 });
 }
 
 async function generateFlags(text: string): Promise<[number, string[]]> {
