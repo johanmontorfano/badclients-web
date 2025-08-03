@@ -1,7 +1,7 @@
 "use client";
 
 import { BackButton } from "@/components/auth/back_button";
-import { sendEmailReset } from "../actions";
+import { sendEmailReset } from "./actions";
 import { useActionState } from "react";
 
 export default function Page() {

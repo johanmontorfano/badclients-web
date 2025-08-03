@@ -3,7 +3,7 @@ import FaviconLight from "@/public/assets/icon.png";
 import FaviconDark from "@/public/assets/icon_dark.png";
 import Image from "next/image";
 
-export const jersey10 = Jersey_10({ weight: "400" });
+export const jersey10 = Jersey_10({ weight: "400", subsets: ["latin"] });
 
 export function Favicon(props: { width?: number; height?: number }) {
     return (

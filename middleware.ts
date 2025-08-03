@@ -13,8 +13,6 @@ export async function middleware(req: NextRequest) {
     const headers = new Headers(req.headers);
     let cookies: any[] = [];
 
-    headers.set("x-pathname", req.nextUrl.pathname);
-
     const supabase = createServerClient(
         process.env.NEXT_PUBLIC_SUPABASE_URL!,
         process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
@@ -78,6 +76,9 @@ export async function middleware(req: NextRequest) {
             cookies,
         );
 
+    // If we are on a server action, headers are not edited by the middleware.
+    if (req.headers.get("next-action") !== null)
+        return withSupabaseCookies(NextResponse.next({ request: req }), cookies);
     return withSupabaseCookies(
         NextResponse.next({ request: req, headers }),
         cookies,

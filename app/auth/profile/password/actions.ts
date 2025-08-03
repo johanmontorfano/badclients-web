@@ -6,15 +6,19 @@ import { createClient } from "@/utils/supabase/server";
 export type OperationType = "change" | "reset";
 
 export async function sendEmailReset(state: any, form: FormData) {
-    const supabase = await createClient();
-    const { error } = await supabase.auth.resetPasswordForEmail(
-        form.get("email") as string,
-        {
-            redirectTo: origin + "/auth/profile/password?type=recovery",
-        },
-    );
+    try {
+        const supabase = await createClient();
+        const { error } = await supabase.auth.resetPasswordForEmail(
+            form.get("email") as string,
+            {
+                redirectTo: origin + "/auth/profile/password?type=recovery",
+            },
+        );
 
-    return { status: error ? error.code : "ok" };
+        return { status: error ? error.code : "ok" };
+    } catch (error) {
+        return { status: error ? JSON.stringify(error) : "ok" };
+    }
 }
 
 // NOTE: bind `operationType`
