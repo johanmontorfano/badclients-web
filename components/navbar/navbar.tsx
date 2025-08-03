@@ -12,7 +12,7 @@ export async function Navbar() {
     return (
         <div className="navbar bg-base-100 shadow-sm">
             <div className="navbar-start">
-                <NavbarOverlay />
+                <NavbarOverlay isLoggedIn={isLoggedIn} />
                 <a className="btn btn-ghost text-xl" href="/">
                     BadClients
                 </a>
