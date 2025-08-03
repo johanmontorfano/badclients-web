@@ -3,13 +3,25 @@ import FaviconLight from "@/public/assets/icon.png";
 import FaviconDark from "@/public/assets/icon_dark.png";
 import Image from "next/image";
 
-const jersey10 = Jersey_10({ weight: "400" });
+export const jersey10 = Jersey_10({ weight: "400" });
 
-export function Favicon(props: { width?: number, height?: number }) {
-    return <>
-        <Image alt="favicon" src={FaviconLight} className="dark:hidden" {...props} />
-        <Image alt="favicon" src={FaviconDark} className="hidden dark:block" {...props} />
-    </>
+export function Favicon(props: { width?: number; height?: number }) {
+    return (
+        <>
+            <Image
+                alt="favicon"
+                src={FaviconLight}
+                className="dark:hidden"
+                {...props}
+            />
+            <Image
+                alt="favicon"
+                src={FaviconDark}
+                className="hidden dark:block"
+                {...props}
+            />
+        </>
+    );
 }
 
 export function Logo() {
