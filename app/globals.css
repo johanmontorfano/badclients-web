@@ -1,2 +1,16 @@
 @import "tailwindcss";
-@plugin "daisyui";
+@plugin "daisyui" {
+    logs: true;
+}
+
+@plugin "daisyui/theme" {
+    name: "light";
+    default: true;
+    --color-primary: oklch(0.6225 0.2175 32.6);
+}
+
+@plugin "daisyui/theme" {
+    name: "dark";
+    prefersdark: true;
+    --color-primary: oklch(0.6225 0.2175 32.6);
+}
