@@ -21,7 +21,7 @@ export async function Navbar() {
             </div>
             <div className="navbar-end">
                 <a
-                    className="btn btn-ghost"
+                    className="btn btn-ghost max-md:hidden"
                     href="https://github.com/johanmontorfano/badclients"
                 >
                     Star on Github
