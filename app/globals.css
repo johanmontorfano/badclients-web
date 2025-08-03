@@ -19,8 +19,8 @@
 }
 
 @utility input {
-  @apply max-md:text-lg;
+    @apply max-md:text-lg;
 }
 @utility textarea {
-  @apply max-md:text-lg;
+    @apply max-md:text-lg;
 }

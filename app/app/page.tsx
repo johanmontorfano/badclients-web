@@ -78,7 +78,11 @@ export default function Page() {
             return;
         }
 
-        setAnalysis(typeof data.flags === "object" ? data.flags : JSON.parse(data.flags));
+        setAnalysis(
+            typeof data.flags === "object"
+                ? data.flags
+                : JSON.parse(data.flags),
+        );
         setRemaining(data.remainingUsages);
         setLoading(false);
     }
