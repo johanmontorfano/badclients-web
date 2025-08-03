@@ -58,7 +58,8 @@ export async function middleware(req: NextRequest) {
         loggedIn &&
         anon &&
         req.nextUrl.pathname.startsWith("/auth") &&
-        (req.nextUrl.pathname !== "/auth/signup" && req.nextUrl.pathname !== "/auth/login")
+        req.nextUrl.pathname !== "/auth/signup" &&
+        req.nextUrl.pathname !== "/auth/login"
     )
         return withSupabaseCookies(
             NextResponse.redirect(origin + "/auth/signup", { headers }),

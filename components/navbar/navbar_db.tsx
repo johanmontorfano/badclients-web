@@ -15,24 +15,51 @@ export function RenderDesktopLinks(props: {
 }) {
     return (
         <ul
-            className={`${props.dropdown ? "dropdown-content" : "menu-horizontal"} flex items-center menu px-1`}
+            className={`${
+                props.dropdown
+                    ? "dropdown-content menu bg-base-100 rounded-box shadow-xl border border-base-300 min-w-[200px] p-3 z-[1]"
+                    : "menu menu-horizontal flex items-center gap-2"
+            }`}
         >
             {Object.keys(props.links).map((l) => {
-                if (typeof props.links[l] === "string")
+                if (typeof props.links[l] === "string") {
                     return (
                         <li key={props.links[l]}>
-                            <a href={props.links[l]}>{l}</a>
+                            <a
+                                href={props.links[l]}
+                                className={`${
+                                    props.dropdown
+                                        ? "rounded-lg transition-all duration-200 font-medium"
+                                        : "btn btn-ghost rounded-btn transition-all duration-200 font-medium"
+                                }`}
+                            >
+                                {l}
+                            </a>
                         </li>
                     );
+                }
+
                 return (
-                    <li key={props.links[l]}>
-                        <details className="dropdown">
-                            <summary className="m-1">{l}</summary>
+                    <li key={l}>
+                        <div
+                            className={`dropdown dropdown-hover ${props.dropdown ? "dropdown-right" : "dropdown-end"}`}
+                        >
+                            <div
+                                tabIndex={0}
+                                role="button"
+                                className={`${
+                                    props.dropdown
+                                        ? "flex items-center justify-between w-full rounded-lg hover:bg-primary hover:text-primary-content transition-all duration-200 px-4 font-medium group"
+                                        : "transition-all duration-200 font-medium group"
+                                }`}
+                            >
+                                <span>{l}</span>
+                            </div>
                             <RenderDesktopLinks
                                 links={props.links[l]}
                                 dropdown
                             />
-                        </details>
+                        </div>
                     </li>
                 );
             })}

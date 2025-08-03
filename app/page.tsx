@@ -17,7 +17,9 @@ export default function Page() {
                     <div className="hero-content w-full text-center">
                         <div className="w-full flex flex-col items-center">
                             <Favicon width={120} />
-                            <h1 className={`text-6xl md:text-7xl font-bold text-primary my-6 ${jersey10.className}`}>
+                            <h1
+                                className={`text-6xl md:text-7xl font-bold text-primary my-6 ${jersey10.className}`}
+                            >
                                 Bad Clients
                             </h1>
                             <h2 className="text-2xl md:text-3xl font-semibold mb-8 text-base-content/80">
@@ -54,9 +56,21 @@ export default function Page() {
                     </div>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-                    <DownloadExtensionButton icon="/assets/chrome.svg" name="Chrome" to="/" />
-                    <DownloadExtensionButton icon="/assets/firefox.svg" name="Firefox" to="/" />
-                    <DownloadExtensionButton icon="/assets/edge.svg" name="Edge" to="/" />
+                    <DownloadExtensionButton
+                        icon="/assets/chrome.svg"
+                        name="Chrome"
+                        to="/"
+                    />
+                    <DownloadExtensionButton
+                        icon="/assets/firefox.svg"
+                        name="Firefox"
+                        to="/"
+                    />
+                    <DownloadExtensionButton
+                        icon="/assets/edge.svg"
+                        name="Edge"
+                        to="/"
+                    />
                 </div>
             </div>
         </div>

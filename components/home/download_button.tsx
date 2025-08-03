@@ -1,4 +1,8 @@
-export function DownloadExtensionButton(props: { icon: string, name: string, to: string }) {
+export function DownloadExtensionButton(props: {
+    icon: string;
+    name: string;
+    to: string;
+}) {
     return (
         <a
             href={props.to}
