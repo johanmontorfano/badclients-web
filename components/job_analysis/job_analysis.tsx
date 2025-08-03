@@ -38,9 +38,9 @@ export function JobAnalysis(props: { flags: Record<string, any> }) {
                 </div>
             </div>
             {description && (
-                <div className="card bg-base-100 border-l-4 border-l-secondary shadow-md">
+                <div className="card bg-base-100 shadow-md">
                     <div className="card-body p-4">
-                        <h3 className="font-semibold text-secondary text-sm uppercase tracking-wide mb-2">
+                        <h3 className="font-semibold text-sm uppercase tracking-wide mb-2">
                             Description
                         </h3>
                         <p className="text-base-content leading-relaxed">
