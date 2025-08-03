@@ -80,14 +80,14 @@ export default async function Page(props: {
             </div>
             <div className="w-full flex justify-center">
                 <div className="w-full max-w-6xl flex justify-end">
-                <div className="join justify-end">
-                    <a href="/pricing?curr=USD" className="btn join-item">
-                        $
-                    </a>
-                    <a href="/pricing?curr=EUR" className="btn join-item">
-                        €
-                    </a>
-                </div>
+                    <div className="join justify-end">
+                        <a href="/pricing?curr=USD" className="btn join-item">
+                            $
+                        </a>
+                        <a href="/pricing?curr=EUR" className="btn join-item">
+                            €
+                        </a>
+                    </div>
                 </div>
             </div>
             <div className="mt-12 grid gap-6 lg:grid-cols-3 max-lg:grid-rows-3 max-w-6xl mx-auto h-full justify-center">

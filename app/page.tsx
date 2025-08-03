@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { JobInputHero } from "@/components/job_analysis/job_input_hero";
+import { Favicon } from "@/components/logo";
 
 export const metadata: Metadata = {
     title: "Avoid loosing time and money for sketchy clients with Bad Clients",
@@ -10,6 +11,7 @@ export const metadata: Metadata = {
 export default function Page() {
     return (
         <div className="grow flex flex-col items-center justify-center p-8">
+            <Favicon width={120} />
             <h1 className="text-4xl font-bold mb-6 text-center">
                 BadClients — Spot Bad Freelance Jobs Instantly
             </h1>

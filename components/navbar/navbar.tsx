@@ -2,6 +2,7 @@ import { createClient } from "@/utils/supabase/server";
 import { BsPersonCircle } from "react-icons/bs";
 import { NavbarOverlay } from "./navbar_overlay";
 import { links, RenderDesktopLinks } from "./navbar_db";
+import { Logo } from "../logo";
 
 export async function Navbar() {
     const supabase = await createClient();
@@ -13,9 +14,7 @@ export async function Navbar() {
         <div className="navbar bg-base-100 shadow-sm">
             <div className="navbar-start">
                 <NavbarOverlay isLoggedIn={isLoggedIn} />
-                <a className="btn btn-ghost text-xl" href="/">
-                    BadClients
-                </a>
+                <Logo />
             </div>
             <div className="navbar-center hidden lg:flex">
                 <RenderDesktopLinks links={links} />
