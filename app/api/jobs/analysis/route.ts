@@ -50,14 +50,14 @@ description: write a fast description of the job. It must be a plain one-line st
         "https://openrouter.ai/api/v1/chat/completions",
         {
             method: "POST",
-            headers: {
-                Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
-                "Content-Type": "application/json",
-                "HTTP-Referer": process.env.OPENROUTER_REFERER,
-                "X-Title": process.env.OPENROUTER_TITLE,
-            },
+            headers: [
+                "Authorization", `Bearer ${process.env.OPENROUTER_API_KEY}`,
+                "Content-Type", "application/json",
+                "HTTP-Referer", process.env.OPENROUTER_REFERER,
+                "X-Title", process.env.OPENROUTER_TITLE,
+            ],
             body: JSON.stringify(payload),
-        },
+        } as any,
     );
 
     const content = await response.json();
