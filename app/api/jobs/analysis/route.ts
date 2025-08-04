@@ -72,7 +72,7 @@ function headers() {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "https://www.upwork.com",
     "Access-Control-Allow-Methods": "POST, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type, Authorization, Cookie",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization, Cookie, Set-Cookie",
     "Access-Control-Allow-Credentials": "true",
     "Access-Control-Allow-Private-Network": "true"
 }
