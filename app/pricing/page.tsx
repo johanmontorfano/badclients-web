@@ -42,7 +42,7 @@ const tiers = [
     {
         name: "Lifetime Hunter",
         price: {
-            EUR: "€59 one-time",
+            EUR: "€40 one-time",
             USD: "$59 one-time",
         },
         description:
