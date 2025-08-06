@@ -102,7 +102,7 @@ export async function POST(req: NextRequest) {
             { status: 403, headers: headers() },
         );
 
-    const { input } = await req.json();
+    const { input } = (await req.json()) || { input: undefined };
 
     if (!input)
         return NextResponse.json(
