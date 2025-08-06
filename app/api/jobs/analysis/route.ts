@@ -86,8 +86,6 @@ export async function OPTIONS() {
 }
 
 export async function POST(req: NextRequest) {
-    console.log(req.cookies.getAll());
-
     // Before anything, we verify that the user has enough credits to do the
     // operation. Every client is an user (anonymous by default), this way we
     // are always able to check remaining credits.
