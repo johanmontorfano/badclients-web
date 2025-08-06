@@ -1,24 +1,24 @@
 "use client";
 
-import { useState, useEffect, useActionState } from "react";
+import { useState, useEffect, useActionState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/utils/supabase/client";
-import { handleChangePassword, OperationType, sendEmailReset } from "./actions";
+import { handleChangePassword, OperationType } from "./actions";
 import { BackButton } from "@/components/auth/back_button";
 
 const PAGE_INFOS = {
     reset: ["Set new password", "Enter your new password below"],
     change: ["Change password", "Update your account password"],
-};
+}
 
-export default function Page() {
+function Suspensed() {
     const router = useRouter();
     const params = useSearchParams();
     const supabase = createClient();
 
     const [mode, setMode] = useState<OperationType | "loading">("loading");
     const [state, action, pending] = useActionState(
-        handleChangePassword.bind(null, mode),
+        handleChangePassword.bind(null, mode as any),
         { status: "" },
     );
     const [email, setEmail] = useState("");
@@ -235,4 +235,10 @@ export default function Page() {
             </div>
         </div>
     );
+}
+
+// Avois CSR bailout
+// TODO: Cleaner way
+export default function Page() {
+    return <Suspense><Suspensed /></Suspense>
 }

@@ -7,9 +7,9 @@ import { PlanTiers, planUsage } from "@/utils/stripe/plans";
 import { createClient } from "@/utils/supabase/client";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 
-export default function Page() {
+function Suspensed() {
     const router = useRouter();
     const params = useSearchParams();
 
@@ -118,4 +118,10 @@ export default function Page() {
             </div>
         </div>
     );
+}
+
+// Avois CSR bailout
+// TODO: Cleaner way
+export default function Page() {
+    return <Suspense><Suspensed /></Suspense>
 }

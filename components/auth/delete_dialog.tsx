@@ -15,7 +15,7 @@ export function DeleteDialog() {
     const [error, setError] = useState("");
 
     function openDeleteDialog() {
-        document.getElementById("delete_dialog")!.showModal();
+        (document.getElementById("delete_dialog")! as any).showModal();
     }
 
     async function deleteAccount() {

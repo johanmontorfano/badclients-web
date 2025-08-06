@@ -23,7 +23,7 @@ export async function middleware(req: NextRequest) {
                 },
 
                 setAll(cookiesToSet: any) {
-                    cookiesToSet.forEach(({ name, value, options }) => {
+                    cookiesToSet.forEach(({ name, value, options }: any) => {
                         req.cookies.set(name, value);
                     });
                     cookies = cookiesToSet;
@@ -78,7 +78,10 @@ export async function middleware(req: NextRequest) {
 
     // If we are on a server action, headers are not edited by the middleware.
     if (req.headers.get("next-action") !== null)
-        return withSupabaseCookies(NextResponse.next({ request: req }), cookies);
+        return withSupabaseCookies(
+            NextResponse.next({ request: req }),
+            cookies,
+        );
     return withSupabaseCookies(
         NextResponse.next({ request: req, headers }),
         cookies,

@@ -2,7 +2,7 @@
 import Link from "next/link";
 
 const mdxComponents = {
-    h1: ({ children, ...props }) => (
+    h1: ({ children, ...props }: any) => (
         <h1
             className="text-3xl font-bold mb-6 mt-8 text-base-content border-b border-base-300 pb-2"
             {...props}
@@ -10,7 +10,7 @@ const mdxComponents = {
             {children}
         </h1>
     ),
-    h2: ({ children, ...props }) => (
+    h2: ({ children, ...props }: any) => (
         <h2
             className="text-2xl font-semibold mb-4 mt-6 text-base-content"
             {...props}
@@ -18,7 +18,7 @@ const mdxComponents = {
             {children}
         </h2>
     ),
-    h3: ({ children, ...props }) => (
+    h3: ({ children, ...props }: any) => (
         <h3
             className="text-xl font-medium mb-3 mt-5 text-base-content"
             {...props}
@@ -26,27 +26,27 @@ const mdxComponents = {
             {children}
         </h3>
     ),
-    p: ({ children, ...props }) => (
+    p: ({ children, ...props }: any) => (
         <p className="mb-4 leading-relaxed text-base-content" {...props}>
             {children}
         </p>
     ),
-    ul: ({ children, ...props }) => (
+    ul: ({ children, ...props }: any) => (
         <ul className="mb-4 ml-6 list-disc" {...props}>
             {children}
         </ul>
     ),
-    ol: ({ children, ...props }) => (
+    ol: ({ children, ...props }: any) => (
         <ol className="mb-4 ml-6 list-decimal" {...props}>
             {children}
         </ol>
     ),
-    li: ({ children, ...props }) => (
+    li: ({ children, ...props }: any) => (
         <li className="mb-2 text-base-content" {...props}>
             {children}
         </li>
     ),
-    a: ({ href, children, ...props }) => {
+    a: ({ href, children, ...props }: any) => {
         const isExternal = href?.startsWith("http");
         if (isExternal) {
             return (
@@ -71,7 +71,7 @@ const mdxComponents = {
             </Link>
         );
     },
-    blockquote: ({ children, ...props }) => (
+    blockquote: ({ children, ...props }: any) => (
         <blockquote
             className="border-l-4 border-primary pl-4 italic my-4 bg-base-200 p-4 rounded-r"
             {...props}
@@ -79,7 +79,7 @@ const mdxComponents = {
             {children}
         </blockquote>
     ),
-    code: ({ children, className, ...props }) => {
+    code: ({ children, className, ...props }: any) => {
         // Check if it's a code block or inline code
         if (className?.includes("language-")) {
             return (
@@ -100,7 +100,7 @@ const mdxComponents = {
             </code>
         );
     },
-    pre: ({ children, ...props }) => (
+    pre: ({ children, ...props }: any) => (
         <pre
             className="bg-base-300 p-4 rounded-lg overflow-x-auto mb-4"
             {...props}
@@ -108,24 +108,24 @@ const mdxComponents = {
             {children}
         </pre>
     ),
-    table: ({ children, ...props }) => (
+    table: ({ children, ...props }: any) => (
         <div className="overflow-x-auto mb-4">
             <table className="table table-zebra w-full" {...props}>
                 {children}
             </table>
         </div>
     ),
-    th: ({ children, ...props }) => (
+    th: ({ children, ...props }: any) => (
         <th className="font-semibold" {...props}>
             {children}
         </th>
     ),
-    img: ({ alt, ...props }) => (
+    img: ({ alt, ...props }: any) => (
         <img className="rounded-lg shadow-md mx-auto" alt={alt} {...props} />
     ),
-    hr: (props) => <hr className="border-base-300 my-8" {...props} />,
+    hr: (props: any) => <hr className="border-base-300 my-8" {...props} />,
     // Custom alert component
-    Alert: ({ type = "info", children }) => (
+    Alert: ({ type = "info", children }: any) => (
         <div className={`alert alert-${type} mb-4`}>
             <svg
                 className="stroke-current shrink-0 h-6 w-6"
