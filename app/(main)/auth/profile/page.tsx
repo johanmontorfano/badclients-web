@@ -3,7 +3,7 @@ import {
     BsFillPersonXFill,
     BsKey,
     BsQuestionCircle,
-    BsLink45Deg
+    BsLink45Deg,
 } from "react-icons/bs";
 import { BackButton } from "@/components/auth/back_button";
 import { PlanTiers, planUsage } from "@/utils/stripe/plans";

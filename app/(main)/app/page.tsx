@@ -123,5 +123,9 @@ function Suspensed() {
 // Avois CSR bailout
 // TODO: Cleaner way
 export default function Page() {
-    return <Suspense><Suspensed /></Suspense>
+    return (
+        <Suspense>
+            <Suspensed />
+        </Suspense>
+    );
 }

@@ -9,7 +9,7 @@ import { BackButton } from "@/components/auth/back_button";
 const PAGE_INFOS = {
     reset: ["Set new password", "Enter your new password below"],
     change: ["Change password", "Update your account password"],
-}
+};
 
 function Suspensed() {
     const router = useRouter();
@@ -240,5 +240,9 @@ function Suspensed() {
 // Avois CSR bailout
 // TODO: Cleaner way
 export default function Page() {
-    return <Suspense><Suspensed /></Suspense>
+    return (
+        <Suspense>
+            <Suspensed />
+        </Suspense>
+    );
 }

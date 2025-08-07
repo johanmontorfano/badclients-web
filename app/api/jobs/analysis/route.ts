@@ -51,10 +51,14 @@ description: write a fast description of the job. It must be a plain one-line st
         {
             method: "POST",
             headers: [
-                "Authorization", `Bearer ${process.env.OPENROUTER_API_KEY}`,
-                "Content-Type", "application/json",
-                "HTTP-Referer", process.env.OPENROUTER_REFERER,
-                "X-Title", process.env.OPENROUTER_TITLE,
+                "Authorization",
+                `Bearer ${process.env.OPENROUTER_API_KEY}`,
+                "Content-Type",
+                "application/json",
+                "HTTP-Referer",
+                process.env.OPENROUTER_REFERER,
+                "X-Title",
+                process.env.OPENROUTER_TITLE,
             ],
             body: JSON.stringify(payload),
         } as any,
@@ -69,20 +73,24 @@ description: write a fast description of the job. It must be a plain one-line st
 
 function headers() {
     return {
-    "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": "https://www.upwork.com",
-    "Access-Control-Allow-Methods": "POST, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type, Authorization, Cookie, Set-Cookie",
-    "Access-Control-Allow-Credentials": "true",
-    "Access-Control-Allow-Private-Network": "true"
-}
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "https://www.upwork.com",
+        "Access-Control-Allow-Methods": "POST, OPTIONS",
+        "Access-Control-Allow-Headers":
+            "Content-Type, Authorization, Cookie, Set-Cookie",
+        "Access-Control-Allow-Credentials": "true",
+        "Access-Control-Allow-Private-Network": "true",
+    };
 }
 
 export async function OPTIONS() {
-    return NextResponse.json({}, {
-        status: 200,
-        headers: headers()
-    });
+    return NextResponse.json(
+        {},
+        {
+            status: 200,
+            headers: headers(),
+        },
+    );
 }
 
 export async function POST(req: NextRequest) {
@@ -135,5 +143,8 @@ export async function POST(req: NextRequest) {
 
     const flags = await generateFlags(input);
 
-    return NextResponse.json({ flags, remainingUsages: maxUsage - usage - 1 }, { headers: headers() });
+    return NextResponse.json(
+        { flags, remainingUsages: maxUsage - usage - 1 },
+        { headers: headers() },
+    );
 }
