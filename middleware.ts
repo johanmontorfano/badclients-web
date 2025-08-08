@@ -13,6 +13,8 @@ export async function middleware(req: NextRequest) {
     const headers = new Headers(req.headers);
     let cookies: any[] = [];
 
+    headers.set("x-pathname", req.nextUrl.pathname);
+
     const supabase = createServerClient(
         process.env.NEXT_PUBLIC_SUPABASE_URL!,
         process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
