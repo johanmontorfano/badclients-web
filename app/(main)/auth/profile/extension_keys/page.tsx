@@ -9,6 +9,7 @@ export const metadata: Metadata = {
     title: "Extension Keys",
 };
 
+// TODO: Consider adding realtime updates
 export default async function Page() {
     const supabase = await createClient();
     const userPayload = await supabase.auth.getUser();
