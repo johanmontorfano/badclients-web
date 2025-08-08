@@ -3,6 +3,7 @@
 import { JobAnalysisErrors } from "@/components/job_analysis/data";
 import { JobAnalysis } from "@/components/job_analysis/job_analysis";
 import { JobInputSection } from "@/components/job_analysis/job_input";
+import { toast } from "@/components/toast/new";
 import { PlanTiers, planUsage } from "@/utils/stripe/plans";
 import { createClient } from "@/utils/supabase/client";
 import { useSearchParams } from "next/navigation";
@@ -28,6 +29,11 @@ function Suspensed() {
 
         getRemainingCredits();
     });
+
+    useEffect(() => {
+        if (errorCode !== "")
+            toast(errorCode);
+    }, [errorCode]);
 
     async function getRemainingCredits() {
         const supabase = createClient();
@@ -89,11 +95,6 @@ function Suspensed() {
 
     return (
         <div className="grow flex flex-col items-center justify-between p-2">
-            {errorCode !== "" && (
-                <div className="alert alert-error mb-4">
-                    <span className="text-sm">{errorCode}</span>
-                </div>
-            )}
             {analysis ? (
                 <div className="grow flex justify-center items-center mb-8">
                     <JobAnalysis flags={analysis} />
