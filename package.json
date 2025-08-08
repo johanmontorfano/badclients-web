@@ -8,6 +8,7 @@
         "build": "next build",
         "start": "next start",
         "lint": "next lint --fix",
+        "prettier": "prettier . --write --tab-width 4",
         "prepare": "husky"
     },
     "dependencies": {
