@@ -150,10 +150,7 @@ export default async function Page(props: {
                                 </ul>
                             </div>
                             <div>
-                                <PricingButton
-                                    url={tier.url}
-                                    curr={currency}
-                                />
+                                <PricingButton url={tier.url} curr={currency} />
                             </div>
                         </div>
                     </div>
