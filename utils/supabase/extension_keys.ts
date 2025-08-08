@@ -25,7 +25,7 @@ export async function authUsingExtensionKey(key: string) {
         .from("extension_keys")
         .update({
             key: new_key,
-            usage: data[0].usage + 1
+            usage: data[0].usage + 1,
         })
         .eq("id", data[0].id);
     return { sudo_as: data[0].user_id, next_key: new_key };

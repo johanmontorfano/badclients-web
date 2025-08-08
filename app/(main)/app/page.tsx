@@ -31,8 +31,7 @@ function Suspensed() {
     });
 
     useEffect(() => {
-        if (errorCode !== "")
-            toast(errorCode);
+        if (errorCode !== "") toast(errorCode);
     }, [errorCode]);
 
     async function getRemainingCredits() {

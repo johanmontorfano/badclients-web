@@ -49,7 +49,7 @@ export function JobInputSection({
             e.preventDefault();
             analyzeJobPost();
         }
-    };
+    }
 
     return (
         <div className="w-full max-w-4xl mx-auto">

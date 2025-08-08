@@ -5,7 +5,7 @@ const withMDX = require("@next/mdx")({
         remarkPlugins: [
             ["remark-gfm", { strict: true, throwOnError: true }],
             ["remark-frontmatter"],
-            ["remark-mdx-frontmatter"]
+            ["remark-mdx-frontmatter"],
         ],
     },
 });

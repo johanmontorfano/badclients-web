@@ -13,7 +13,7 @@ export const planPrices: Record<PlanTiers, Array<string>> = {
     [PlanTiers.Hunter]: [process.env.STRIPE_PLAN_PRICE_HUNTER!],
     [PlanTiers.Lifetime]: [
         process.env.STRIPE_PLAN_PRICE_LIFETIME_EUR!,
-        process.env.STRIPE_PLAN_PRICE_LIFETIME_USD!
+        process.env.STRIPE_PLAN_PRICE_LIFETIME_USD!,
     ],
 };
 

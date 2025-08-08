@@ -75,8 +75,7 @@ function headers() {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "https://www.upwork.com",
         "Access-Control-Allow-Methods": "POST, OPTIONS",
-        "Access-Control-Allow-Headers":
-            "Content-Type, Authorization",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization",
         "Access-Control-Allow-Credentials": "true",
         "Access-Control-Allow-Private-Network": "true",
     };
@@ -84,7 +83,7 @@ function headers() {
 
 /* Will authenticate the user either with supabase session or extension key.
  * It is assumed that the Authorization header is formatted as:
- * 
+ *
  * ```
  * Authorization: Bearer [key]
  * ```
@@ -98,19 +97,17 @@ async function sbaseAndExtKeyAuth(sb: SupabaseClient, req: NextRequest) {
 
         if (authorization === null || !authorization.startsWith("Bearer "))
             return {
-                error: "failed to auth with supabase and no extension key provided"
+                error: "failed to auth with supabase and no extension key provided",
             };
 
         const extKey = authorization.replace("Bearer ", "");
         const authAs = await authUsingExtensionKey(extKey);
 
-        if (authAs.error !== undefined)
-            return { error: authAs.error };
+        if (authAs.error !== undefined) return { error: authAs.error };
 
         const { data, error } = await sb.auth.admin.getUserById(authAs.sudo_as);
 
-        if (error)
-            return { error: error.name };
+        if (error) return { error: error.name };
         return { user: data.user, nextKey: authAs.next_key };
     }
     return { user: data.user };
@@ -137,10 +134,13 @@ export async function POST(req: NextRequest) {
     const { user, error, nextKey } = await sbaseAndExtKeyAuth(supabase, req);
 
     if (error || user === undefined)
-        return NextResponse.json({
-            error: JobAnalysisErrors.AuthenticationFailed,
-            message: error || "User not found"
-        }, { status: 403, headers: headers() });
+        return NextResponse.json(
+            {
+                error: JobAnalysisErrors.AuthenticationFailed,
+                message: error || "User not found",
+            },
+            { status: 403, headers: headers() },
+        );
 
     const { input } = (await req.json()) || { input: undefined };
 
@@ -169,7 +169,7 @@ export async function POST(req: NextRequest) {
             {
                 error: JobAnalysisErrors.NotEnoughCredits,
                 accountType: user.is_anonymous ? "anon" : "perma",
-                nextKey
+                nextKey,
             },
             { status: 403, headers: headers() },
         );

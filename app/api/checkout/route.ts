@@ -22,7 +22,8 @@ export async function GET(req: NextRequest) {
     if (isNaN(planID) || planID < 1 || planID > 2)
         return NextResponse.json({ error: "Bad plan price" }, { status: 400 });
 
-    const priceIndex = planID === PlanTiers.Lifetime ? (currency === "EUR" ? 0 : 1) : 0;
+    const priceIndex =
+        planID === PlanTiers.Lifetime ? (currency === "EUR" ? 0 : 1) : 0;
     // Since we cannot specify a currency when setting up a checkout session
     // for a one-time payment, we specify prices in an array. If the price is
     // for a subscription, [0] is the only value used in the price.
@@ -32,7 +33,10 @@ export async function GET(req: NextRequest) {
     try {
         const checkout = await stripe.checkout.sessions.create({
             success_url: origin + "/auth/profile?billing=ok",
-            customer_email: user.data.user.user_metadata.customerID === undefined ? user.data.user.email! : undefined,
+            customer_email:
+                user.data.user.user_metadata.customerID === undefined
+                    ? user.data.user.email!
+                    : undefined,
             customer: user.data.user.user_metadata.customerID,
             currency: currency.toLowerCase(),
             metadata: {
