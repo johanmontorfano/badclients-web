@@ -16,6 +16,7 @@ export function DownloadExtensionButton(props: {
                 alt="download-icon"
                 src={props.icon}
                 width={30}
+                height={30}
                 className="mr-2"
             />
             Add to {props.name}
