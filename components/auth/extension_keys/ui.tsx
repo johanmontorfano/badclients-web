@@ -8,14 +8,7 @@ import { CopyKeyButton } from "./copy_key";
 import { DeleteKeyButton } from "./delete_key";
 import { createClient } from "@/utils/supabase/client";
 import { toast } from "@/components/toast/new";
-
-interface ExtensionKey {
-    id: string;
-    key: string;
-    user_id: string;
-    usage: number;
-    created_at: string;
-}
+import { ExtensionKey } from "@/utils/supabase/extension_keys";
 
 // INFO: Since keys are rotating (docs/extension_keys) and extensions will not
 // be able to use keys identifiers for security reasons, the key copied is the

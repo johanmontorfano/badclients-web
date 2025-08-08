@@ -1,6 +1,14 @@
 import { createClient } from "@/utils/supabase/server";
 import { v4 } from "uuid";
 
+export interface ExtensionKey {
+    id: string;
+    key: string;
+    user_id: string;
+    usage: number;
+    created_at: string;
+}
+
 // WARN: Server function using privileges
 export async function authUsingExtensionKey(key: string) {
     const supabase = await createClient();
