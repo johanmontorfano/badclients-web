@@ -3,8 +3,9 @@ import { useState } from "react";
 import { toast } from "@/components/toast/new";
 
 export function DeleteKeyButton(props: {
-    keyId: string;
-    onDeleted: () => void;
+    keyId: string,
+    fullText?: boolean,
+    onDeleted: () => void
 }) {
     const [isLoading, setIsLoading] = useState(false);
     const [showConfirm, setShowConfirm] = useState(false);
@@ -35,11 +36,10 @@ export function DeleteKeyButton(props: {
         <>
             <button
                 onClick={() => setShowConfirm(true)}
-                className="btn btn-ghost btn-sm text-error hover:bg-error hover:text-error-content"
+                className={`btn ${props.fullText ? "" : "btn-ghost"} btn-sm text-error hover:bg-error hover:text-error-content`}
             >
-                <BsTrash size={16} />
+                {props.fullText ? "Delete key" : <BsTrash size={16} />}
             </button>
-
             {showConfirm && (
                 <div className="modal modal-open">
                     <div className="modal-box">

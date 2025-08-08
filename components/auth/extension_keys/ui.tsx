@@ -146,7 +146,7 @@ export function StatefulPart(props: {
                         </div>
                     ) : (
                         <div className="overflow-x-auto">
-                            <table className="table w-full">
+                            <table className="w-full hidden sm:table">
                                 <thead>
                                     <tr>
                                         <th className="text-base-content/60">
@@ -176,11 +176,7 @@ export function StatefulPart(props: {
                                                     />
                                                 </div>
                                             </td>
-                                            <td>
-                                                <span>
-                                                    {key.usage} requests
-                                                </span>
-                                            </td>
+                                            <td>{key.usage} requests</td>
                                             <td className="text-base-content/60">
                                                 {formatDate(key.created_at)}
                                             </td>
@@ -194,6 +190,49 @@ export function StatefulPart(props: {
                                     ))}
                                 </tbody>
                             </table>
+                            <div className="sm:hidden space-y-4">
+                                {keys.map((key, i) => (
+                                    <div
+                                        key={key.id}
+                                        className="collapse collapse-arrow bg-base-100 p-2 rounded-lg shadow border border-base-300"
+                                    >
+                                        <input type="checkbox" />
+                                        <div className="collapse-title flex items-center justify-between">
+                                            <div className="flex items-center">
+                                                <p className="font-semibold mr-2">
+                                                    Key
+                                                </p>
+                                                <div className="flex items-center gap-2">
+                                                    <code className="bg-base-200 px-2 py-1 rounded text-sm">
+                                                        {truncateKey(key.id)}
+                                                    </code>
+                                                    <CopyKeyButton
+                                                        keyValue={key.key}
+                                                    />
+                                                </div>
+                                            </div>
+                                            <span>{key.usage} requests</span>
+                                        </div>
+                                        <div className="collapse-content">
+                                            <div className="flex justify-between mb-2">
+                                                <span className="text-sm text-base-content/60">
+                                                    Created
+                                                </span>
+                                                <span className="text-base-content/60">
+                                                    {formatDate(key.created_at)}
+                                                </span>
+                                            </div>
+                                            <div className="flex justify-end" tabIndex={0}>
+                                                <DeleteKeyButton
+                                                    fullText
+                                                    keyId={key.id}
+                                                    onDeleted={() => loadKeys()}
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     )}
                 </div>
