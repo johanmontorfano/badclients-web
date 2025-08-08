@@ -14,7 +14,11 @@ const tiers = [
             USD: "$0",
         },
         description: "Perfect for light and casual usage.",
-        features: ["5 requests per day", "Extension support"],
+        features: [
+            `${planUsage[0].usage} requests per day`,
+            `${planUsage[0].extensionKeys} extension keys`,
+            "Extension support",
+        ],
         missing: [
             "Job knowledge database access",
             "Lifetime usage",
@@ -32,6 +36,7 @@ const tiers = [
         description: "Ideal for active freelancers seeking opportunities.",
         features: [
             `${planUsage[1].usage} requests per day`,
+            `${planUsage[1].extensionKeys} extension keys`,
             "Extension support",
             "Job knowledge database access",
         ],
@@ -49,6 +54,7 @@ const tiers = [
             "Everything in Hunter with lifetime access. Limited early supporter offer.",
         features: [
             `${planUsage[2].usage} requests per day`,
+            `${planUsage[2].extensionKeys} extension keys`,
             "Extension support",
             "Job knowledge database access",
             "Lifetime usage",

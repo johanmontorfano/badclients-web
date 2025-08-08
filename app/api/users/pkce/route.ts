@@ -1,4 +1,3 @@
-import { origin } from "@/utils/origin";
 import { createClient } from "@/utils/supabase/server";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -21,10 +20,10 @@ export async function GET(req: NextRequest) {
 
     // Here is were we verify the token_hash so that our users
     // will later be able to update their password.
-    const {
-        data: { session },
-        error,
-    } = await supabase.auth.verifyOtp({ token_hash, type: "email" });
+    const { error } = await supabase.auth.verifyOtp({
+        token_hash,
+        type: "email"
+    });
 
     if (error) {
         return NextResponse.json({ error: error.message }, { status: 400 });

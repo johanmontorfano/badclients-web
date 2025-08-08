@@ -27,7 +27,7 @@ function Suspensed() {
         }
 
         getRemainingCredits();
-    }, []);
+    });
 
     async function getRemainingCredits() {
         const supabase = createClient();

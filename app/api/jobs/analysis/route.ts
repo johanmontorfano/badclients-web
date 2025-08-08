@@ -118,9 +118,10 @@ export async function POST(req: NextRequest) {
             { status: 400, headers: headers() },
         );
 
-    let { planType, usage, usageLastReset } = data.user
-        .user_metadata as UserMetadata;
+    const metadata = data.user.user_metadata as UserMetadata;
+    const { planType } = metadata;
     const { usage: maxUsage } = planUsage[planType];
+    let { usage, usageLastReset } = metadata;
 
     if (planRequiresReset(planType, usageLastReset)) {
         await updateUserMetadata(data.user.id, {

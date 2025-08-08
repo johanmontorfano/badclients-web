@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { BsArrowUp, BsArrowUpShort } from "react-icons/bs";
+import { BsArrowUpShort } from "react-icons/bs";
 
 interface JobInputSectionProps {
     input: string;

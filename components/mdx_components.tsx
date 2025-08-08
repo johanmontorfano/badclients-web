@@ -1,4 +1,4 @@
-// components/mdx-components.js
+import Image from "next/image";
 import Link from "next/link";
 
 const mdxComponents = {
@@ -121,7 +121,7 @@ const mdxComponents = {
         </th>
     ),
     img: ({ alt, ...props }: any) => (
-        <img className="rounded-lg shadow-md mx-auto" alt={alt} {...props} />
+        <Image className="rounded-lg shadow-md mx-auto" alt={alt} {...props} />
     ),
     hr: (props: any) => <hr className="border-base-300 my-8" {...props} />,
     // Custom alert component

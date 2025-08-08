@@ -12,18 +12,25 @@ export const planPrices: Record<PlanTiers, string> = {
 
 export const planUsage: Record<
     PlanTiers,
-    { usage: number; timeRange: "day" | "month" }
+    {
+        usage: number;
+        timeRange: "day" | "month";
+        extensionKeys: number;
+    }
 > = {
     [PlanTiers.Free]: {
         usage: 3,
+        extensionKeys: 1,
         timeRange: "day",
     },
     [PlanTiers.Hunter]: {
         usage: 500,
+        extensionKeys: 3,
         timeRange: "month",
     },
     [PlanTiers.Lifetime]: {
         usage: 1000,
+        extensionKeys: 3,
         timeRange: "month",
     },
 };

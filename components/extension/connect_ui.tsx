@@ -1,6 +1,5 @@
 "use client";
 
-import { createClient } from "@/utils/supabase/client";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -21,15 +20,11 @@ export function ExtensionConnectUI() {
             setNotFound(true);
             setTimeout(() => router.back(), 1300);
         } else pkceFlowExt();
-    }, []);
+    }, [router]);
 
-    async function pkceFlowExt() {
-        const client = createClient();
+    async function pkceFlowExt() {}
 
-    }
-
-
-    return <div>
-        {!notFound ? null : "Extension not found, redirecting..."}
-    </div> 
+    return (
+        <div>{!notFound ? null : "Extension not found, redirecting..."}</div>
+    );
 }
