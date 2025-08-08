@@ -47,7 +47,7 @@ export function NavbarOverlay(props: { isLoggedIn: boolean }) {
                     <div>
                         <a
                             className="btn w-full p-2 mb-2"
-                            href="https://github.com/johanmontorfano/badclients"
+                            href="https://github.com/johanmontorfano/badclients-web"
                         >
                             Star on Github
                         </a>
