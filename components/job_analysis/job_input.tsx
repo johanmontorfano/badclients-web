@@ -38,13 +38,13 @@ export function JobInputSection({
 
     const isValidInput = input.trim().length >= 20;
 
-    const handleKeyDown = (e: React.KeyboardEvent) => {
+    function handleKeyDown(e: React.KeyboardEvent) {
         if (
             e.key === "Enter" &&
             (e.metaKey || e.ctrlKey) &&
             isValidInput &&
             !loading &&
-            (requestsLeft || 1) > 0
+            getRequestsLeft() > 0
         ) {
             e.preventDefault();
             analyzeJobPost();
