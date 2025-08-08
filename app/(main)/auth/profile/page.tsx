@@ -175,6 +175,22 @@ export default async function Page() {
                             </div>
                         </a>
                         <a
+                            href="/auth/profile/extension_keys"
+                            className="btn btn-outline justify-start h-auto py-4"
+                        >
+                            <div className="flex items-center">
+                                <BsLink45Deg size={24} />
+                                <div className="text-left ml-4">
+                                    <div className="font-medium">
+                                        Manage Extensions
+                                    </div>
+                                    <div className="text-sm text-base-content/60">
+                                        Link extensions across browsers
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        <a
                             href="/docs"
                             className="btn btn-outline justify-start h-auto py-4"
                         >
@@ -186,22 +202,6 @@ export default async function Page() {
                                     </div>
                                     <div className="text-sm text-base-content/60">
                                         Get help with your account
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                        <a
-                            href="/auth/confirm/extension"
-                            className="btn btn-outline justify-start h-auto py-4"
-                        >
-                            <div className="flex items-center">
-                                <BsLink45Deg size={24} />
-                                <div className="text-left ml-4">
-                                    <div className="font-medium">
-                                        Link Extension
-                                    </div>
-                                    <div className="text-sm text-base-content/60">
-                                        Link the extension with your account
                                     </div>
                                 </div>
                             </div>

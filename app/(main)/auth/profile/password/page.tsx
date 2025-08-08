@@ -38,13 +38,13 @@ function Suspensed() {
 
     useEffect(() => {
         determineOperationMode();
-    }, []);
+    });
 
     useEffect(() => {
         // if the operation suceeded, we redirect
         if (state.status === "ok")
             setTimeout(() => router.push("/auth/profile"), 1000);
-    }, [state]);
+    }, [state, router]);
 
     if (mode === "loading") {
         return (
