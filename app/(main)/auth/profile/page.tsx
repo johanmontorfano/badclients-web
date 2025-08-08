@@ -38,8 +38,8 @@ export default async function Page() {
     return (
         <div className="flex grow bg-base-200">
             <div className="max-w-6xl mx-auto px-6 py-8">
-                <div className="flex items-center justify-between mb-12">
-                    <div>
+                <div className="flex max-sm:flex-col-reverse max-sm:items-start items-center justify-between mb-12">
+                    <div className="max-sm:w-full">
                         <h1 className="text-4xl font-bold text-base-content">
                             Profile
                         </h1>
