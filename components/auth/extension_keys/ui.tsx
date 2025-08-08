@@ -191,7 +191,7 @@ export function StatefulPart(props: {
                                 </tbody>
                             </table>
                             <div className="sm:hidden space-y-4">
-                                {keys.map((key, i) => (
+                                {keys.map((key) => (
                                     <div
                                         key={key.id}
                                         className="collapse collapse-arrow bg-base-100 p-2 rounded-lg shadow border border-base-300"
