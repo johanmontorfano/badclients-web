@@ -22,7 +22,7 @@ export async function Navbar() {
             <div className="navbar-end">
                 <a
                     className="btn btn-ghost max-md:hidden"
-                    href="https://github.com/johanmontorfano/badclients"
+                    href="https://github.com/johanmontorfano/badclients-web"
                 >
                     Star on Github
                 </a>
