@@ -222,7 +222,10 @@ export function StatefulPart(props: {
                                                     {formatDate(key.created_at)}
                                                 </span>
                                             </div>
-                                            <div className="flex justify-end" tabIndex={0}>
+                                            <div
+                                                className="flex justify-end"
+                                                tabIndex={0}
+                                            >
                                                 <DeleteKeyButton
                                                     fullText
                                                     keyId={key.id}

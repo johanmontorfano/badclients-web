@@ -3,9 +3,9 @@ import { useState } from "react";
 import { toast } from "@/components/toast/new";
 
 export function DeleteKeyButton(props: {
-    keyId: string,
-    fullText?: boolean,
-    onDeleted: () => void
+    keyId: string;
+    fullText?: boolean;
+    onDeleted: () => void;
 }) {
     const [isLoading, setIsLoading] = useState(false);
     const [showConfirm, setShowConfirm] = useState(false);
