@@ -33,16 +33,14 @@ export function StatefulPart(props: {
     const canCreateMore = keys.length < props.maxKeys;
 
     async function loadKeys() {
-    const { data: extensionKeys, error } = await supabase
-        .from("extension_keys")
-        .select("*")
-        .eq("user_id", props.userId)
-        .order("created_at", { ascending: false });
+        const { data: extensionKeys, error } = await supabase
+            .from("extension_keys")
+            .select("*")
+            .eq("user_id", props.userId)
+            .order("created_at", { ascending: false });
 
-        if (error || extensionKeys === null)
-            toast("Failed to reload keys");
-        else
-            setKeys(extensionKeys as ExtensionKey[]);
+        if (error || extensionKeys === null) toast("Failed to reload keys");
+        else setKeys(extensionKeys as ExtensionKey[]);
     }
 
     function getPlanDisplayName(planType: PlanTiers) {
@@ -94,7 +92,7 @@ export function StatefulPart(props: {
                             <CreateKeyButton
                                 loading={isLoading}
                                 toggleLoading={() => {
-                                    setIsLoading(p => !p);
+                                    setIsLoading((p) => !p);
                                     loadKeys();
                                 }}
                             />
@@ -124,7 +122,7 @@ export function StatefulPart(props: {
                             <CreateKeyButton
                                 loading={isLoading}
                                 toggleLoading={() => {
-                                    setIsLoading(p => !p);
+                                    setIsLoading((p) => !p);
                                     loadKeys();
                                 }}
                             />
@@ -147,7 +145,7 @@ export function StatefulPart(props: {
                                 <CreateKeyButton
                                     loading={isLoading}
                                     toggleLoading={() => {
-                                        setIsLoading(p => !p);
+                                        setIsLoading((p) => !p);
                                         loadKeys();
                                     }}
                                 />
@@ -193,7 +191,12 @@ export function StatefulPart(props: {
                                             <td className="text-base-content/60">
                                                 {formatDate(key.created_at)}
                                             </td>
-                                            <td><DeleteKeyButton keyId={key.id} onDeleted={() => loadKeys()} /></td>
+                                            <td>
+                                                <DeleteKeyButton
+                                                    keyId={key.id}
+                                                    onDeleted={() => loadKeys()}
+                                                />
+                                            </td>
                                         </tr>
                                     ))}
                                 </tbody>

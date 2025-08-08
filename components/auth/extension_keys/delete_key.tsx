@@ -2,7 +2,10 @@ import { BsTrash } from "react-icons/bs";
 import { useState } from "react";
 import { toast } from "@/components/toast/new";
 
-export function DeleteKeyButton(props: { keyId: string; onDeleted: () => void }) {
+export function DeleteKeyButton(props: {
+    keyId: string;
+    onDeleted: () => void;
+}) {
     const [isLoading, setIsLoading] = useState(false);
     const [showConfirm, setShowConfirm] = useState(false);
 
@@ -13,20 +16,19 @@ export function DeleteKeyButton(props: { keyId: string; onDeleted: () => void })
             const res = await fetch("/api/users/keys/delete", {
                 method: "DELETE",
                 body: JSON.stringify({
-                    key_id: props.keyId
-                })
+                    key_id: props.keyId,
+                }),
             });
 
             const body = await res.json();
 
-            if (body.error)
-                toast("Deletion failed: " + body.error);
+            if (body.error) toast("Deletion failed: " + body.error);
             props.onDeleted();
         } catch (e) {
             toast("Deletion failed: " + e);
         } finally {
             setIsLoading(false);
-        }       
+        }
     }
 
     return (

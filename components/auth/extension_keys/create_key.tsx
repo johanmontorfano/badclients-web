@@ -10,13 +10,12 @@ export function CreateKeyButton(props: {
 
         try {
             const res = await fetch("/api/users/keys/create", {
-                method: "POST"
+                method: "POST",
             });
 
             const body = await res.json();
 
-            if (body.error)
-                toast("Creation failed: " + body.error);
+            if (body.error) toast("Creation failed: " + body.error);
         } catch (e) {
             toast("Creation failed: " + e);
         } finally {

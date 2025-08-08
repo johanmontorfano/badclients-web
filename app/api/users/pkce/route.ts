@@ -22,7 +22,7 @@ export async function GET(req: NextRequest) {
     // will later be able to update their password.
     const { error } = await supabase.auth.verifyOtp({
         token_hash,
-        type: "email"
+        type: "email",
     });
 
     if (error) {

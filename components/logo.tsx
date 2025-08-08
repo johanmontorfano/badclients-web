@@ -27,7 +27,10 @@ export function Favicon(props: { width?: number; height?: number }) {
 
 export function Logo() {
     return (
-        <Link className={`btn btn-ghost text-4xl ${jersey10.className}`} href="/">
+        <Link
+            className={`btn btn-ghost text-4xl ${jersey10.className}`}
+            href="/"
+        >
             <Favicon width={30} height={40} />
             Bad Clients
         </Link>

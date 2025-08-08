@@ -16,11 +16,15 @@ export async function DELETE(req: NextRequest) {
     const body = await req.json();
 
     if (body.key_id === null)
-        return NextResponse.json({ error: "no key specified" }, { status: 400 });
+        return NextResponse.json(
+            { error: "no key specified" },
+            { status: 400 },
+        );
 
     console.log(body);
 
-    const { error: ierror } = await supabase.from("extension_keys")
+    const { error: ierror } = await supabase
+        .from("extension_keys")
         .delete()
         .eq("id", body.key_id);
 
