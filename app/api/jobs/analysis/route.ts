@@ -30,7 +30,7 @@ async function generateFlags(text: string, prompt: keyof typeof Prompts): Promis
         messages: [
             {
                 role: "system",
-                content: Prompts.in_app.join("\n")
+                content: Prompts[prompt].join("\n")
             },
             {
                 role: "user",
@@ -158,7 +158,7 @@ export async function POST(req: NextRequest) {
         usageLastReset = Date.now();
     }
 
-    if (usage >= maxUsage)
+    if (usage >= maxUsage && false)
         return NextResponse.json(
             {
                 error: JobAnalysisErrors.NotEnoughCredits,
