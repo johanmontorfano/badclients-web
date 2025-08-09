@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { BackButton } from "@/components/auth/back_button";
 import { login } from "../actions";
+import { SubmitForm } from "@/components/submit_form";
 
 export const metadata: Metadata = {
     title: "Login",
@@ -34,7 +35,7 @@ export default async function LoginPage(props: {
             </div>
             <div className="card bg-base-100 shadow-lg border border-base-300">
                 <div className="card-body p-6">
-                    <form className="space-y-4">
+                    <form className="space-y-4" action={login}>
                         <div className="form-control">
                             <label className="label pb-1">
                                 <span className="label-text text-sm font-medium">
@@ -73,13 +74,7 @@ export default async function LoginPage(props: {
                                 </Link>
                             </label>
                         </div>
-
-                        <button
-                            formAction={login}
-                            className="btn btn-primary w-full mt-6"
-                        >
-                            Log in
-                        </button>
+                        <SubmitForm label="Log in" />
                     </form>
                 </div>
             </div>

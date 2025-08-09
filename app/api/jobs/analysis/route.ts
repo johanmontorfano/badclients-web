@@ -24,13 +24,16 @@ function unwrapMarkdown(text: any): any {
     return text;
 }
 
-async function generateFlags(text: string, prompt: keyof typeof Prompts): Promise<[number, string[]]> {
+async function generateFlags(
+    text: string,
+    prompt: keyof typeof Prompts,
+): Promise<[number, string[]]> {
     const payload = {
         model: "cognitivecomputations/dolphin-mistral-24b-venice-edition:free",
         messages: [
             {
                 role: "system",
-                content: Prompts[prompt].join("\n")
+                content: Prompts[prompt].join("\n"),
             },
             {
                 role: "user",
@@ -169,9 +172,14 @@ export async function POST(req: NextRequest) {
         );
     await updateUserMetadata(user.id, { usage: usage + 1 });
 
-    const flags = await generateFlags(input, inExtension ? (
-        planType === PlanTiers.Free ? "in_extension::free" : "in_extension::*"
-    ) : "in_app");
+    const flags = await generateFlags(
+        input,
+        inExtension
+            ? planType === PlanTiers.Free
+                ? "in_extension::free"
+                : "in_extension::*"
+            : "in_app",
+    );
 
     return NextResponse.json(
         { flags, remainingUsages: maxUsage - usage - 1, nextKey },

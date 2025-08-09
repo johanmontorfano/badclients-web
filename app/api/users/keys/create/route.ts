@@ -44,7 +44,6 @@ export async function POST() {
         usage: 0,
     });
 
-
     if (ierror)
         return NextResponse.json(
             {

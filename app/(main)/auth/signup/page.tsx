@@ -2,6 +2,7 @@ import { BackButton } from "@/components/auth/back_button";
 import Link from "next/link";
 import { signup } from "../actions";
 import { Metadata } from "next";
+import { SubmitForm } from "@/components/submit_form";
 
 export const metadata: Metadata = {
     title: "Sign Up",
@@ -27,7 +28,7 @@ export default async function SignupPage(props: {
             </div>
             <div className="card bg-base-100 shadow-lg border border-base-300">
                 <div className="card-body p-6">
-                    <form className="space-y-4">
+                    <form className="space-y-4" action={signup}>
                         <div className="form-control">
                             <label className="label pb-1">
                                 <span className="label-text text-sm font-medium">
@@ -71,13 +72,7 @@ export default async function SignupPage(props: {
                                 minLength={8}
                             />
                         </div>
-
-                        <button
-                            formAction={signup}
-                            className="btn btn-primary w-full mt-6"
-                        >
-                            Create account
-                        </button>
+                        <SubmitForm label="Sign up" />
                     </form>
                 </div>
             </div>
