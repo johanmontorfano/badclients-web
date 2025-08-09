@@ -37,7 +37,7 @@ const tiers = [
         features: [
             `${planUsage[1].usage} requests per day`,
             `${planUsage[1].extensionKeys} extension keys`,
-            "Extension support",
+            "Advanced extension support",
             "Job knowledge database access",
         ],
         missing: ["Lifetime usage", "Early access"],
@@ -55,7 +55,7 @@ const tiers = [
         features: [
             `${planUsage[2].usage} requests per day`,
             `${planUsage[2].extensionKeys} extension keys`,
-            "Extension support",
+            "Advanced extension support",
             "Job knowledge database access",
             "Lifetime usage",
             "Early access",
