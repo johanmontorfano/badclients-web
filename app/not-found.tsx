@@ -17,7 +17,7 @@ export default function NotFound() {
                         Go Home
                     </Link>
                     <Link
-                        href="https://github.com/johanmontorfano/badclients-web/issue"
+                        href="https://github.com/johanmontorfano/badclients-web/issues"
                         className="btn btn-outline"
                     >
                         Report an Issue

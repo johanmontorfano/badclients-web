@@ -21,14 +21,12 @@ export async function DELETE(req: NextRequest) {
             { status: 400 },
         );
 
-    console.log(body);
 
     const { error: ierror } = await supabase
         .from("extension_keys")
         .delete()
         .eq("id", body.key_id);
 
-    console.log(ierror);
 
     if (ierror)
         return NextResponse.json(
