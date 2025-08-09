@@ -158,7 +158,7 @@ export async function POST(req: NextRequest) {
         usageLastReset = Date.now();
     }
 
-    if (usage >= maxUsage && false)
+    if (usage >= maxUsage)
         return NextResponse.json(
             {
                 error: JobAnalysisErrors.NotEnoughCredits,
