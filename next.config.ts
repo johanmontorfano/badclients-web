@@ -1,7 +1,12 @@
 import type { NextConfig } from "next";
+
 const withMDX = require("@next/mdx")({
     options: {
-        remarkPlugins: [["remark-gfm", { strict: true, throwOnError: true }]],
+        remarkPlugins: [
+            ["remark-gfm", { strict: true, throwOnError: true }],
+            ["remark-frontmatter"],
+            ["remark-mdx-frontmatter"],
+        ],
     },
 });
 

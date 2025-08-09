@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { BsArrowUp, BsArrowUpShort } from "react-icons/bs";
+import { BsArrowUpShort } from "react-icons/bs";
 
 interface JobInputSectionProps {
     input: string;
@@ -38,18 +38,18 @@ export function JobInputSection({
 
     const isValidInput = input.trim().length >= 20;
 
-    const handleKeyDown = (e: React.KeyboardEvent) => {
+    function handleKeyDown(e: React.KeyboardEvent) {
         if (
             e.key === "Enter" &&
             (e.metaKey || e.ctrlKey) &&
             isValidInput &&
             !loading &&
-            (requestsLeft || 1) > 0
+            getRequestsLeft() > 0
         ) {
             e.preventDefault();
             analyzeJobPost();
         }
-    };
+    }
 
     return (
         <div className="w-full max-w-4xl mx-auto">

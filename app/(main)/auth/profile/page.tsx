@@ -3,6 +3,7 @@ import {
     BsFillPersonXFill,
     BsKey,
     BsQuestionCircle,
+    BsLink45Deg,
 } from "react-icons/bs";
 import { BackButton } from "@/components/auth/back_button";
 import { PlanTiers, planUsage } from "@/utils/stripe/plans";
@@ -36,9 +37,9 @@ export default async function Page() {
 
     return (
         <div className="flex grow bg-base-200">
-            <div className="max-w-6xl mx-auto px-6 py-8">
-                <div className="flex items-center justify-between mb-12">
-                    <div>
+            <div className="max-w-6xl mx-auto px-6 py-8 w-full">
+                <div className="flex max-sm:flex-col-reverse max-sm:items-start items-center justify-between mb-12">
+                    <div className="max-sm:w-full">
                         <h1 className="text-4xl font-bold text-base-content">
                             Profile
                         </h1>
@@ -169,6 +170,22 @@ export default async function Page() {
                                     </div>
                                     <div className="text-sm text-base-content/60">
                                         Check subscriptions and plans
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        <a
+                            href="/auth/profile/extension_keys"
+                            className="btn btn-outline justify-start h-auto py-4"
+                        >
+                            <div className="flex items-center">
+                                <BsLink45Deg size={24} />
+                                <div className="text-left ml-4">
+                                    <div className="font-medium">
+                                        Manage Extensions
+                                    </div>
+                                    <div className="text-sm text-base-content/60">
+                                        Link extensions across browsers
                                     </div>
                                 </div>
                             </div>

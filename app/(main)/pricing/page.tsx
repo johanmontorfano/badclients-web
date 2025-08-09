@@ -14,7 +14,11 @@ const tiers = [
             USD: "$0",
         },
         description: "Perfect for light and casual usage.",
-        features: ["5 requests per day", "Extension support"],
+        features: [
+            `${planUsage[0].usage} requests per day`,
+            `${planUsage[0].extensionKeys} extension keys`,
+            "Extension support",
+        ],
         missing: [
             "Job knowledge database access",
             "Lifetime usage",
@@ -32,7 +36,8 @@ const tiers = [
         description: "Ideal for active freelancers seeking opportunities.",
         features: [
             `${planUsage[1].usage} requests per day`,
-            "Extension support",
+            `${planUsage[1].extensionKeys} extension keys`,
+            "Advanced extension support",
             "Job knowledge database access",
         ],
         missing: ["Lifetime usage", "Early access"],
@@ -42,14 +47,15 @@ const tiers = [
     {
         name: "Lifetime Hunter",
         price: {
-            EUR: "€59 one-time",
+            EUR: "€40 one-time",
             USD: "$59 one-time",
         },
         description:
             "Everything in Hunter with lifetime access. Limited early supporter offer.",
         features: [
             `${planUsage[2].usage} requests per day`,
-            "Extension support",
+            `${planUsage[2].extensionKeys} extension keys`,
+            "Advanced extension support",
             "Job knowledge database access",
             "Lifetime usage",
             "Early access",
@@ -144,11 +150,7 @@ export default async function Page(props: {
                                 </ul>
                             </div>
                             <div>
-                                <PricingButton
-                                    url={tier.url}
-                                    mode={tier.mode}
-                                    curr={currency}
-                                />
+                                <PricingButton url={tier.url} curr={currency} />
                             </div>
                         </div>
                     </div>

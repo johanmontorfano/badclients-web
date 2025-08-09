@@ -6,7 +6,7 @@ import { DownloadExtensionButton } from "@/components/home/download_button";
 export const metadata: Metadata = {
     title: "Avoid loosing time and money for sketchy clients with Bad Clients",
     description:
-        'Prevent yourself from experiencing another "Can you do it cheaper line" with Bad Clients. This tool will help you analyze any freelance proposal and avoid sketchy clients with unrealistic expectations. You can even download the extension (Chrome, Edge, Firefox) to see in real-time on Upwork, Fiverr (and soon others) bad proposals.',
+        'Prevent yourself from experiencing another "Can you do it cheaper line" with Bad Clients. This tool will help you analyze any freelance proposal and avoid sketchy clients with unrealistic expectations. You can even download the extension (Chrome, Edge, Firefox) to see in real-time on Upwork (and soon others) bad proposals.',
 };
 
 export default function Page() {
@@ -43,11 +43,6 @@ export default function Page() {
                                     on{" "}
                                     <span className="font-semibold text-primary">
                                         Upwork
-                                    </span>
-                                    ,
-                                    <span className="font-semibold text-primary">
-                                        {" "}
-                                        Fiverr
                                     </span>
                                     , and more.
                                 </p>

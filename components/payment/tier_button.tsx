@@ -1,34 +1,14 @@
-"use client";
-
-import { redirect } from "next/navigation";
+import Link from "next/link";
 
 // A button that redirects to the appropriate endpoint depending on the choosen
 // pricing offer.
-export function PricingButton(props: {
-    url: string;
-    mode: string;
-    curr: "USD" | "EUR";
-}) {
-    async function handleClick(url: string, mode: string) {
-        if (mode === "redirect") redirect(url);
-        else {
-            const res = await fetch(`${url}&curr=${props.curr}`, {
-                method: "POST",
-            });
-
-            if (res.ok) {
-                const { url } = await res.json();
-
-                redirect(url);
-            }
-        }
-    }
+export function PricingButton(props: { url: string; curr: "USD" | "EUR" }) {
     return (
-        <button
+        <Link
             className="btn btn-primary btn-block"
-            onClick={() => handleClick(props.url, props.mode)}
+            href={`${props.url}&curr=${props.curr}`}
         >
             Continue
-        </button>
+        </Link>
     );
 }
