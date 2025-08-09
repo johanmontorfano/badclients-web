@@ -27,7 +27,6 @@ export async function DELETE(req: NextRequest) {
         .delete()
         .eq("id", body.key_id);
 
-    console.log(ierror);
 
     if (ierror)
         return NextResponse.json(
