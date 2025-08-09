@@ -10,7 +10,7 @@
         "allocatedTime: Not enough (When a job duration is provided, and it is too short to complete the task); Enough (When a job duration is provided, and it is enough to complete the task)",
         "workload: High; Medium; Low",
         "offering: Generous; Correct; Low",
-        "seriousness: Scam or unrealistic (The job feels like a scan, this can be based on the flags choosen above; i.e. not enough time + low offer can mean the client is a scam or is not realistic); Serious",
+        "seriousness: Scam or unrealistic (The job feels like a scam, this can be based on the flags choosen above; i.e. not enough time + low offer can mean the client is a scam or is not realistic); Serious",
         "score: Generate a numeric score between 0 and 100 (inclusive) representing the overall worth",
         "description: Write a fast description of the job. It must be a plain one-line string without line breaks or special characters."
     ],
