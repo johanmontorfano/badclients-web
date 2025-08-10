@@ -3,7 +3,8 @@ export const links: Record<string, string | Record<string, string>> = {
     Documentation: {
         Overview: "/docs",
         Extension: "/docs/extension",
-        Upcoming: "/docs/upcoming"
+        Upcoming: "/docs/upcoming",
+        "Privacy Policy": "/docs/privacy"
     },
     Pricing: "/pricing",
 };
