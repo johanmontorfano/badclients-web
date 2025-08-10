@@ -10,7 +10,7 @@ export function DownloadExtensionButton(props: {
             href={props.to}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn w-full rounded-sm py-8"
+            className={`btn w-full rounded-sm py-8 ${props.to === "/" ? "btn-disabled" : "" }`}
         >
             <Image
                 alt="download-icon"
