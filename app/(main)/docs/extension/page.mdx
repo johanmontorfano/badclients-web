@@ -3,23 +3,34 @@ title: Extension
 description: EXTENSION
 ---
 
-# 🧩 Chrome Extension
+import { DownloadExtensionButton } from "@/components/home/download_button";
 
-## 🔧 Install
+<video src="/assets/videos/extension_request.mp4" className="mb-8 border-8 border-base-100 rounded-lg" controls disablePictureInPicture disableRemotePlayback controlsList="nodownload nofullscreen noplaybackrate" muted loop></video>
 
-1. Visit the Chrome Web Store _(Coming soon)_
-2. Click **Add to Chrome**
-3. Log in or start using right away
+# 🧩 Extension Installation
+
+<div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+    <DownloadExtensionButton icon="/assets/chrome.svg" name="Chrome" to="/" />
+    <DownloadExtensionButton icon="/assets/firefox.svg" name="Firefox" to="/" />
+    <DownloadExtensionButton icon="/assets/edge.svg" name="Edge" to="/" />
+</div>
+
+## Setting up the extension
+
+To setup the extension, you have to create and copy an extension key from your profile to the extension. To do it, you must go to the [/auth/profile/extension_keys](extension keys page) and create a key.
+
+Then copy the key using the copy icon, open the extension by clicking the icon in the browser toolbar and paste the key in the input.
+
+<video src="/assets/videos/extension_setup.mp4" className="mb-8 border-8 border-base-100 rounded-lg" controls disablePictureInPicture disableRemotePlayback controlsList="nodownload nofullscreen noplaybackrate" muted loop></video>
 
 ---
 
-## 💡 Usage
+## Usage
 
-- Navigate to Upwork or a job board
-- Click the ClientFromHell icon in your extensions bar
-- Paste a job post or message
-- Get the AI analysis instantly
+- Navigate to Upwork and open a job
+- The extension will pop and load analysis in seconds
+- Click the popup after loading to display details
 
 ---
 
-Need help? Email us at `support@clientfromhell.ai`
+Need help? [Submit an issue on GitHub](https://github.com/johanmontorfano/badclients-web/issues)
