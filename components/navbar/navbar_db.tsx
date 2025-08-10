@@ -2,9 +2,8 @@ export const links: Record<string, string | Record<string, string>> = {
     Analyze: "/app",
     Documentation: {
         Overview: "/docs",
-        "How-To": "/docs/howto",
         Extension: "/docs/extension",
-        Billing: "/docs/billing",
+        Upcoming: "/docs/upcoming"
     },
     Pricing: "/pricing",
 };
