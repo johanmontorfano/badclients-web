@@ -7,7 +7,7 @@ const links = [
     { href: "/docs", label: "Overview" },
     { href: "/docs/extension", label: "Extension" },
     { href: "/docs/upcoming", label: "Upcoming features" },
-    { href: "/docs/privacy", label: "Privacy policy" }
+    { href: "/docs/privacy", label: "Privacy policy" },
 ];
 
 export function DocsNavigation() {

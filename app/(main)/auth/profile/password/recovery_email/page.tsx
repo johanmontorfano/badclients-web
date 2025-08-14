@@ -58,10 +58,13 @@ export default function Page() {
                             </div>
                             <button
                                 type="submit"
-                                className="btn btn-primary w-full" 
-
+                                className="btn btn-primary w-full"
                             >
-                                {pending ? <span className="loading loading-spinner loading-sm" /> : "Send reset email"}
+                                {pending ? (
+                                    <span className="loading loading-spinner loading-sm" />
+                                ) : (
+                                    "Send reset email"
+                                )}
                             </button>
                         </form>
                     </div>

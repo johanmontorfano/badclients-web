@@ -4,7 +4,7 @@ export const links: Record<string, string | Record<string, string>> = {
         Overview: "/docs",
         Extension: "/docs/extension",
         Upcoming: "/docs/upcoming",
-        "Privacy Policy": "/docs/privacy"
+        "Privacy Policy": "/docs/privacy",
     },
     Pricing: "/pricing",
 };

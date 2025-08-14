@@ -28,9 +28,10 @@ async function generateFlags(
     text: string,
     prompt: keyof typeof Prompts,
 ): Promise<[number, string[]]> {
-    const model = process.env.NODE_ENV === "production" ? 
-        "openai/gpt-oss-20b" :
-        "cognitivecomputations/dolphin-mistral-24b-venice-edition:free";
+    const model =
+        process.env.NODE_ENV === "production"
+            ? "openai/gpt-oss-20b"
+            : "cognitivecomputations/dolphin-mistral-24b-venice-edition:free";
     const payload = {
         model,
         messages: [
