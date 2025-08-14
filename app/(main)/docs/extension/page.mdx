@@ -5,6 +5,8 @@ description: EXTENSION
 
 import { DownloadExtensionButton } from "@/components/home/download_button";
 
+# 🧩 Extension Installation
+
 <video
     src="/assets/videos/extension_request.mp4"
     className="mb-8 border-8 border-base-100 rounded-lg"
@@ -16,12 +18,17 @@ import { DownloadExtensionButton } from "@/components/home/download_button";
     loop
 ></video>
 
-# 🧩 Extension Installation
-
-<div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-    <DownloadExtensionButton icon="/assets/chrome.svg" name="Chrome" to="/" />
-    <DownloadExtensionButton icon="/assets/firefox.svg" name="Firefox" to="/" />
-    <DownloadExtensionButton icon="/assets/edge.svg" name="Edge" to="/" />
+<div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+    <DownloadExtensionButton
+        icon={["/assets/chrome.svg", "/assets/edge.svg"]}
+        name="Chrome"
+        to="https://chromewebstore.google.com/detail/bad-clients-extension/ajopakcejolgknhebgmddanfdmhfkecm"
+    />
+    <DownloadExtensionButton
+        icon="/assets/firefox.svg"
+        name="Firefox"
+        to="https://addons.mozilla.org/fr/firefox/addon/bad-clients-extension"
+    />
 </div>
 
 ## Setting up the extension
