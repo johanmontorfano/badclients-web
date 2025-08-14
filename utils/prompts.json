@@ -36,6 +36,6 @@
         "allocatedTime: Not enough (When a job duration is provided, and it is too short to complete the task); Enough (When a job duration is provided, and it is enough to complete the task)",
         "workload: High; Medium; Low",
         "offering: Generous; Correct; Low",
-        "legitimacy: Scam or unrealistic (The job feels like a scam, this can be based on the flags choosen above; i.e. not enough time + low offer can mean the client is a scam or is not realistic); Serious"
+        "legitimacy: Scam or unrealistic (The job feels like a scam, this can be based on the flags chosen above; i.e. not enough time + low offer can mean the client is a scam or is not realistic); Serious"
     ]
 }
