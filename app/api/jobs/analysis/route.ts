@@ -12,6 +12,8 @@ import Prompts from "@/utils/prompts.json";
 function unwrapMarkdown(text: any): any {
     if (typeof text === "object") return text;
 
+    console.log(text);
+
     const trimmed = text.trim();
 
     if (trimmed.startsWith("```") && trimmed.endsWith("```")) {
