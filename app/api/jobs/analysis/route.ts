@@ -30,7 +30,7 @@ async function generateFlags(
 ): Promise<[number, string[]]> {
     const model =
         process.env.NODE_ENV === "production"
-            ? "openai/gpt-oss-20b"
+            ? "mistralai/mistral-nemo"
             : "cognitivecomputations/dolphin-mistral-24b-venice-edition:free";
     const payload = {
         model,
@@ -184,6 +184,8 @@ export async function POST(req: NextRequest) {
                 : "in_extension::*"
             : "in_app",
     );
+
+    console.log(flags);
 
     return NextResponse.json(
         { flags, remainingUsages: maxUsage - usage - 1, nextKey },
