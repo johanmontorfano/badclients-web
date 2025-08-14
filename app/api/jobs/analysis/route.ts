@@ -30,7 +30,7 @@ async function generateFlags(
 ): Promise<[number, string[]]> {
     const model =
         process.env.NODE_ENV === "production"
-            ? "mistralai/mistral-nemo"
+            ? "mistralai/mistral-small-3.2-24b-instruct"
             : "cognitivecomputations/dolphin-mistral-24b-venice-edition:free";
     const payload = {
         model,
