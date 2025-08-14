@@ -50,21 +50,16 @@ export default function Page() {
                         </div>
                     </div>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
                     <DownloadExtensionButton
-                        icon="/assets/chrome.svg"
+                        icon={["/assets/chrome.svg", "/assets/edge.svg"]}
                         name="Chrome"
-                        to="/"
+                        to="https://chromewebstore.google.com/detail/bad-clients-extension/ajopakcejolgknhebgmddanfdmhfkecm"
                     />
                     <DownloadExtensionButton
                         icon="/assets/firefox.svg"
                         name="Firefox"
-                        to="/"
-                    />
-                    <DownloadExtensionButton
-                        icon="/assets/edge.svg"
-                        name="Edge"
-                        to="/"
+                        to="https://addons.mozilla.org/fr/firefox/addon/bad-clients-extension"
                     />
                 </div>
             </div>
