@@ -21,7 +21,7 @@ function unwrapMarkdown(text: any): any {
             return JSON.parse(lines.slice(1, -1).join("\n").trim());
     }
 
-    return text;
+    return typeof text !== "object" ? JSON.parse(text) : text;
 }
 
 async function generateFlags(
@@ -184,8 +184,6 @@ export async function POST(req: NextRequest) {
                 : "in_extension::*"
             : "in_app",
     );
-
-    console.log(flags);
 
     return NextResponse.json(
         { flags, remainingUsages: maxUsage - usage - 1, nextKey },
