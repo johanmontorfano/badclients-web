@@ -33,11 +33,11 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default function DocsLayout(props: { children: React.ReactNode }) {
     return (
-        <div className="flex grow bg-base-200">
+        <div className="flex grow">
             <DocsNavigation />
-            <div className="flex grow">
+            <div className="flex grow overflow-hidden bg-base-300 max-h-[93dvh] overflow-y-auto">
                 <main className="flex-1 grow w-full">
-                    <div className="max-w-[700px] mx-auto px-4 py-8">
+                    <div className="max-w-[700px] mx-auto px-4 py-8 max-lg:pt-16">
                         {props.children}
                     </div>
                 </main>

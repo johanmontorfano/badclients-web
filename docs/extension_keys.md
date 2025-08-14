@@ -1,11 +1,12 @@
 # Extension Keys
 
 Due to the difficulty of setting up proper API-to-extension communication (
+
 - SameSite=Lax on Supabase Auth Cookies
 - Origin mismatch
 - Friction and fragmentation if adding authentication separately in the ext
 - PKCE flow not applicable in this case
-) setting up a proper key system to let extensions do AI queries is required.
+  ) setting up a proper key system to let extensions do AI queries is required.
 
 This system is fairly easy, it consists of a table containing 5 entries:
 
@@ -29,4 +30,5 @@ role.
 ## Extension Behaviors Control
 
 This system allows for a different experience within the extension:
+
 - Depending on the tier, the quality and quantity of the data changes.

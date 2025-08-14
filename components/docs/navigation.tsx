@@ -5,9 +5,9 @@ import { usePathname } from "next/navigation";
 
 const links = [
     { href: "/docs", label: "Overview" },
-    { href: "/docs/howto", label: "How-to" },
     { href: "/docs/extension", label: "Extension" },
-    { href: "/docs/billing", label: "Billing" },
+    { href: "/docs/upcoming", label: "Upcoming features" },
+    { href: "/docs/privacy", label: "Privacy policy" },
 ];
 
 export function DocsNavigation() {
@@ -75,8 +75,6 @@ export function DocsNavigation() {
                     ))}
                 </ul>
             </aside>
-
-            {/* Mobile sidebar overlay */}
         </>
     );
 }

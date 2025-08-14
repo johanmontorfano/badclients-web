@@ -57,15 +57,15 @@ export function StatefulPart(props: {
         });
     }
 
-    function truncateKey(key: string) {
-        return `${key.substring(0, 8)}...${key.substring(key.length - 8)}`;
+    function truncateKey(key: string, size = 8) {
+        return `${key.substring(0, size)}...${key.substring(key.length - size)}`;
     }
 
     return (
         <>
             <div className="bg-base-100 rounded-lg p-8 mb-8 border border-base-300">
-                <div className="flex justify-between items-center">
-                    <div>
+                <div className="flex flex-col sm:flex-row justify-between items-center">
+                    <div className="max-sm:w-full">
                         <h3 className="text-sm font-semibold text-base-content/60 uppercase tracking-wider mb-2">
                             Key Usage
                         </h3>
@@ -74,13 +74,13 @@ export function StatefulPart(props: {
                             {getPlanDisplayName(props.planType)} plan)
                         </p>
                     </div>
-                    <div className="flex gap-4 items-center">
-                        {!canCreateMore && (
+                    <div className="flex max-sm:w-full max-sm:justify-between gap-4 items-center">
+                        {!canCreateMore ? (
                             <div className="flex items-center text-warning gap-2">
                                 <BsExclamationTriangle size={20} />
                                 <span className="text-sm">Limit reached</span>
                             </div>
-                        )}
+                        ) : <div />}
                         {canCreateMore ? (
                             <CreateKeyButton
                                 loading={isLoading}
@@ -94,7 +94,7 @@ export function StatefulPart(props: {
                                 href="/pricing"
                                 className="btn btn-outline btn-sm"
                             >
-                                Upgrade Plan →
+                                Upgrade →
                             </a>
                         )}
                     </div>
@@ -204,17 +204,24 @@ export function StatefulPart(props: {
                                                 </p>
                                                 <div className="flex items-center gap-2">
                                                     <code className="bg-base-200 px-2 py-1 rounded text-sm">
-                                                        {truncateKey(key.id)}
+                                                        {truncateKey(key.id, 4)}
                                                     </code>
                                                     <CopyKeyButton
                                                         keyValue={key.key}
                                                     />
                                                 </div>
                                             </div>
-                                            <span>{key.usage} requests</span>
                                         </div>
                                         <div className="collapse-content">
                                             <div className="flex justify-between mb-2">
+                                                <span className="text-sm text-base-content/60">
+                                                    Usage
+                                                </span>
+                                                <span className="text-base-content/60">
+                                                    {key.usage} requests
+                                                </span>
+                                            </div>
+                                        <div className="flex justify-between mb-2">
                                                 <span className="text-sm text-base-content/60">
                                                     Created
                                                 </span>

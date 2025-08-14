@@ -29,7 +29,7 @@ export function NavbarOverlay(props: { isLoggedIn: boolean }) {
                 </svg>
             </button>
             <div
-                className={`inset-0 z-50 h-full w-full bg-[#000000AA] absolute ${opened ? "block" : "hidden"}`}
+                className={`inset-0 z-50 h-dvh w-full bg-[#000000AA] absolute ${opened ? "block" : "hidden"}`}
             >
                 <div className="h-full w-full max-w-[300px] p-4 bg-base-100 flex flex-col justify-between">
                     <div>

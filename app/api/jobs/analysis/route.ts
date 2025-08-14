@@ -24,13 +24,20 @@ function unwrapMarkdown(text: any): any {
     return text;
 }
 
-async function generateFlags(text: string, prompt: keyof typeof Prompts): Promise<[number, string[]]> {
+async function generateFlags(
+    text: string,
+    prompt: keyof typeof Prompts,
+): Promise<[number, string[]]> {
+    const model =
+        process.env.NODE_ENV === "production"
+            ? "openai/gpt-oss-20b"
+            : "cognitivecomputations/dolphin-mistral-24b-venice-edition:free";
     const payload = {
-        model: "cognitivecomputations/dolphin-mistral-24b-venice-edition:free",
+        model,
         messages: [
             {
                 role: "system",
-                content: Prompts.in_app.join("\n")
+                content: Prompts[prompt].join("\n"),
             },
             {
                 role: "user",
@@ -169,9 +176,14 @@ export async function POST(req: NextRequest) {
         );
     await updateUserMetadata(user.id, { usage: usage + 1 });
 
-    const flags = await generateFlags(input, inExtension ? (
-        planType === PlanTiers.Free ? "in_extension::free" : "in_extension::*"
-    ) : "in_app");
+    const flags = await generateFlags(
+        input,
+        inExtension
+            ? planType === PlanTiers.Free
+                ? "in_extension::free"
+                : "in_extension::*"
+            : "in_app",
+    );
 
     return NextResponse.json(
         { flags, remainingUsages: maxUsage - usage - 1, nextKey },
